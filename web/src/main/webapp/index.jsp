@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Panel de Administración</h5>
                     <p class="card-text text-muted">Gestioná tipos de usuario, rangos, países y divisiones.</p>
-                    <a href="<%= request.getContextPath() %>/tipos-usuario" class="btn btn-outline-primary btn-sm">Ir al panel</a>
+                    <a href="<%= request.getContextPath() %>/admin" class="btn btn-outline-primary btn-sm">Ir al panel</a>
                 </div>
             </div>
         </div>

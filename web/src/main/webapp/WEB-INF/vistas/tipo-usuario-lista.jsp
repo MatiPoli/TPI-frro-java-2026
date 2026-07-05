@@ -8,7 +8,10 @@
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h1 class="mb-0">Tipos de Usuario</h1>
-    <a href="<%= request.getContextPath() %>/tipos-usuario/nuevo" class="btn btn-primary">+ Nuevo</a>
+    <div class="d-flex gap-2">
+        <a href="<%= request.getContextPath() %>/admin" class="btn btn-outline-secondary">Volver al panel</a>
+        <a href="<%= request.getContextPath() %>/tipos-usuario/nuevo" class="btn btn-primary">+ Nuevo</a>
+    </div>
 </div>
 
 <div class="card">

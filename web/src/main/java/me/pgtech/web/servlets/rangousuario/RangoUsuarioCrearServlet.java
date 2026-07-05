@@ -17,14 +17,13 @@ public class RangoUsuarioCrearServlet extends BaseApiServlet {
     private final RangoUsuarioApiClient client = new RangoUsuarioApiClient();
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             RangoUsuarioDTO dto = new RangoUsuarioDTO();
             dto.setNombre(req.getParameter("nombre"));
 
             client.crear(dto);
-            resp.sendRedirect(req.getContextPath() + "/rango-usuario");
+            resp.sendRedirect(req.getContextPath() + "/rangos-usuario");
         } catch (IOException e) {
             manejarErrorApi(req, resp, e);
         }

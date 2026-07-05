@@ -7,8 +7,11 @@
 <%@ include file="/WEB-INF/vistas/fragmentos/header.jsp" %>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1 class="mb-0">Rangos</h1>
-    <a href="<%= request.getContextPath() %>/rangos-usuario/nuevo" class="btn btn-primary">+ Nuevo</a>
+    <h1 class="mb-0">Rangos de Usuario</h1>
+    <div class="d-flex gap-2">
+        <a href="<%= request.getContextPath() %>/admin" class="btn btn-outline-secondary">Volver al panel</a>
+        <a href="<%= request.getContextPath() %>/rangos-usuario/nuevo" class="btn btn-primary">+ Nuevo</a>
+    </div>
 </div>
 
 <div class="card">
@@ -31,15 +34,15 @@
                     </thead>
                     <tbody>
                         <%
-                            for (RangoUsuarioDTO rango : rangos) {
+                            for (RangoUsuarioDTO rangoItem : rangos) {
                         %>
                                 <tr>
-                                    <td><%= rango.getId() %></td>
-                                    <td><%= rango.getNombre() %></td>
+                                    <td><%= rangoItem.getId() %></td>
+                                    <td><%= rangoItem.getNombre() %></td>
                                     <td class="text-end">
-                                        <a href="<%= request.getContextPath() %>/rangos-usuario?id=<%= rango.getId() %>" class="btn btn-sm btn-outline-primary">Editar</a>
+                                        <a href="<%= request.getContextPath() %>/rangos-usuario?id=<%= rangoItem.getId() %>" class="btn btn-sm btn-outline-primary">Editar</a>
                                         <form method="post" action="<%= request.getContextPath() %>/rangos-usuario/eliminar" class="d-inline" onsubmit="return confirm('¿Seguro que querés eliminar este rango?');">
-                                            <input type="hidden" name="id" value="<%= rango.getId() %>"/>
+                                            <input type="hidden" name="id" value="<%= rangoItem.getId() %>"/>
                                             <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
                                         </form>
                                     </td>

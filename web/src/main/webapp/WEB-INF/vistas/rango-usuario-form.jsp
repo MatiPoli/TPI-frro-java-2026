@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="me.pgtech.web.dto.RangoUsuarioDTO" %>
 <%
-    RangoUsuarioDTO rango = (RangoUsuarioDTO) request.getAttribute("rango");
-    boolean esNuevo = (rango == null);
+    RangoUsuarioDTO rangoItem = (RangoUsuarioDTO) request.getAttribute("rango");
+    boolean esNuevo = (rangoItem == null);
     request.setAttribute("tituloPagina", esNuevo ? "Nuevo Rango" : "Editar Rango");
 %>
 <%@ include file="/WEB-INF/vistas/fragmentos/header.jsp" %>
@@ -15,12 +15,12 @@
             <form method="post" action="<%= request.getContextPath() %>/rangos-usuario/<%= esNuevo ? "crear" : "actualizar" %>">
 
                 <% if (!esNuevo) { %>
-                    <input type="hidden" name="id" value="<%= rango.getId() %>"/>
+                    <input type="hidden" name="id" value="<%= rangoItem.getId() %>"/>
                 <% } %>
 
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" value="<%= esNuevo ? "" : rango.getNombre() %>" required maxlength="50">
+                    <input type="text" class="form-control" id="nombre" name="nombre" value="<%= esNuevo ? "" : rangoItem.getNombre() %>" required maxlength="50">
                 </div>
 
                 <div class="d-flex gap-2">
