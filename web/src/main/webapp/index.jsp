@@ -1,41 +1,71 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>BTE Cono Sur - Panel</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <span class="navbar-brand mb-0 h1">BTE Cono Sur</span>
-        </div>
-    </nav>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    request.setAttribute("tituloPagina", "Inicio");
+%>
+<%@ include file="/WEB-INF/vistas/fragmentos/header.jsp" %>
 
-    <div class="container mt-4">
-        <h1>Bienvenido</h1>
-        <p class="text-muted">Panel de administración de proyectos y jugadores.</p>
+<div class="mb-4">
+    <h1>Bienvenido</h1>
+    <p class="text-muted">Panel de administración de proyectos y jugadores de BTE Cono Sur.</p>
+</div>
 
-        <div class="card" style="max-width: 400px;">
+<div class="row g-3">
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100">
             <div class="card-body">
-                <h5 class="card-title">Estado de la API</h5>
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h5 class="card-title mb-0">Estado de la API</h5>
+                    <span id="statusDot" class="status-dot status-dot-pendiente"></span>
+                </div>
                 <p class="card-text" id="statusText">Consultando...</p>
-                <button class="btn btn-primary" onclick="consultarStatus()">Refrescar</button>
+                <button class="btn btn-primary btn-sm" onclick="consultarStatus()">Refrescar</button>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const contextPath = "${pageContext.request.contextPath}";
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Proyectos activos</h5>
+                <p class="card-text text-muted">Consultá el listado completo de proyectos del servidor.</p>
+                <a href="<%= request.getContextPath() %>/proyectos" class="btn btn-outline-primary btn-sm">Ver proyectos</a>
+            </div>
+        </div>
+    </div>
 
-        async function consultarStatus() {
+    <% if (esAdmin) { %>
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Panel de Administración</h5>
+                    <p class="card-text text-muted">Gestioná tipos de usuario, rangos, países y divisiones.</p>
+                    <a href="<%= request.getContextPath() %>/tipos-usuario" class="btn btn-outline-primary btn-sm">Ir al panel</a>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+<script>
+    async function consultarStatus() {
+        const statusEl = document.getElementById('statusText');
+        const dotEl = document.getElementById('statusDot');
+        statusEl.innerText = 'Consultando...';
+        dotEl.className = 'status-dot status-dot-pendiente';
+
+        try {
             const resp = await fetch(contextPath + '/status');
             const data = await resp.json();
-            document.getElementById('statusText').innerText = data.mensaje;
+            statusEl.innerText = data.mensaje;
+            dotEl.className = data.mensaje.includes('OK')
+                ? 'status-dot status-dot-ok'
+                : 'status-dot status-dot-error';
+        } catch (e) {
+            statusEl.innerText = 'Error al consultar el status';
+            dotEl.className = 'status-dot status-dot-error';
         }
-        consultarStatus();
-    </script>
-</body>
-</html>
+    }
+    consultarStatus();
+</script>
+
+<%@ include file="/WEB-INF/vistas/fragmentos/footer.jsp" %>
