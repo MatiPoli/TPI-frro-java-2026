@@ -153,6 +153,14 @@ main {
 .table {
     color: var(--texto-principal);
     border-color: var(--borde);
+    --bs-table-bg: transparent !important;
+    --bs-table-accent-bg: transparent !important;
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.05);
+    --bs-table-striped-color: var(--texto-principal);
+    --bs-table-hover-bg: rgba(255, 255, 255, 0.08);
+    --bs-table-hover-color: var(--texto-principal);
+    --bs-table-color: var(--texto-principal);
+    --bs-table-border-color: var(--borde);
 }
 
 .table th {
@@ -167,8 +175,14 @@ main {
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) > * {
-    background-color: rgba(255, 255, 255, 0.03);
-    color: var(--texto-principal);
+    --bs-table-accent-bg: rgba(255, 255, 255, 0.05) !important;
+    color: var(--texto-principal) !important;
+}
+
+.table > :not(caption) > * > * {
+    background-color: var(--bg-panel) !important;
+    color: var(--texto-principal) !important;
+    box-shadow: none !important;
 }
 
 /* Alertas */
