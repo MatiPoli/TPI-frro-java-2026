@@ -41,13 +41,9 @@
                                     <td><%= tipo.getDescripcion() %></td>
                                     <td><%= tipo.getCantProyecSim() %></td>
                                     <td class="text-end">
-                                        <a href="<%= request.getContextPath() %>/tipos-usuario?id=<%= tipo.getId() %>"
-                                           class="btn btn-sm btn-outline-primary">Editar</a>
+                                        <a href="<%= request.getContextPath() %>/tipos-usuario?id=<%= tipo.getId() %>" class="btn btn-sm btn-outline-primary">Editar</a>
 
-                                        <form method="post"
-                                              action="<%= request.getContextPath() %>/tipos-usuario/eliminar"
-                                              class="d-inline"
-                                              onsubmit="return confirm('¿Seguro que querés eliminar este tipo de usuario?');">
+                                        <form method="post" action="<%= request.getContextPath() %>/tipos-usuario/eliminar" class="d-inline" onsubmit="return confirm('¿Seguro que querés eliminar este tipo de usuario?');">
                                             <input type="hidden" name="id" value="<%= tipo.getId() %>"/>
                                             <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
                                         </form>

@@ -12,8 +12,7 @@
 
     <div class="card" style="max-width: 500px; width: 100%;">
         <div class="card-body">
-            <form method="post"
-                  action="<%= request.getContextPath() %>/tipos-usuario/<%= esNuevo ? "crear" : "actualizar" %>">
+            <form method="post" action="<%= request.getContextPath() %>/tipos-usuario/<%= esNuevo ? "crear" : "actualizar" %>">
 
                 <% if (!esNuevo) { %>
                     <input type="hidden" name="id" value="<%= tipo.getId() %>"/>
@@ -21,8 +20,7 @@
 
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre"
-                           value="<%= esNuevo ? "" : tipo.getNombre() %>" required maxlength="50">
+                    <input type="text" class="form-control" id="nombre" name="nombre" value="<%= esNuevo ? "" : tipo.getNombre() %>" required maxlength="50">
                 </div>
 
                 <div class="mb-3">
@@ -32,9 +30,7 @@
 
                 <div class="mb-3">
                     <label for="cantProyecSim" class="form-label">Máx. proyectos simultáneos</label>
-                    <input type="number" class="form-control" id="cantProyecSim"
-                           name="cantProyecSim" value="<%= esNuevo ? "" : tipo.getCantProyecSim() %>"
-                           required min="0">
+                    <input type="number" class="form-control" id="cantProyecSim" name="cantProyecSim" value="<%= esNuevo ? "" : tipo.getCantProyecSim() %>" required min="0">
                 </div>
 
                 <div class="d-flex gap-2">
