@@ -25,10 +25,12 @@ public class StatusServlet extends HttpServlet {
                 .uri(URI.create("http://localhost:7070/api/status"))
                 .GET()
                 .build();
-            HttpResponse<String> apiResponse = client.send(apiRequest, HttpResponse.BodyHandlers.ofString());
+            client.send(apiRequest, HttpResponse.BodyHandlers.ofString());
             resp.getWriter().write(gson.toJson(Map.of("mensaje", "API de bteCSCore respondiendo OK")));
         } catch (Exception e) {
             resp.getWriter().write(gson.toJson(Map.of("mensaje", "API de bteCSCore no disponible")));
         }
     }
 }
+
+//TODO: Mejorar validaciones: de tipo y de jerarquia
