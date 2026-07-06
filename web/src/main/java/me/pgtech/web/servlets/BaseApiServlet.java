@@ -32,4 +32,15 @@ public abstract class BaseApiServlet extends HttpServlet {
             throw new IllegalArgumentException("El parámetro " + paramName + " debe ser numérico");
         }
     }
+
+    protected int obtenerEntero(HttpServletRequest req, String param, int porDefecto) {
+        String valor = req.getParameter(param);
+        if (valor == null || valor.isBlank()) return porDefecto;
+        try {
+            return Integer.parseInt(valor);
+        } catch (NumberFormatException e) {
+            return porDefecto;
+        }
+    }
+    
 }

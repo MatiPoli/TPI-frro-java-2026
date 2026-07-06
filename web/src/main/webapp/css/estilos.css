@@ -254,3 +254,26 @@ footer {
     color: var(--color-danger);
     line-height: 1;
 }
+
+.page-link {
+    background-color: var(--bg-panel);
+    border-color: var(--borde);
+    color: var(--texto-principal);
+}
+
+.page-link:hover {
+    background-color: var(--acento-primario);
+    border-color: var(--acento-primario);
+    color: #fff;
+}
+
+.page-item.active .page-link {
+    background-color: var(--acento-primario);
+    border-color: var(--acento-primario);
+}
+
+.page-item.disabled .page-link {
+    background-color: var(--bg-principal);
+    color: var(--texto-muted);
+    border-color: var(--borde);
+}

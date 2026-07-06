@@ -34,3 +34,4 @@ public class StatusServlet extends HttpServlet {
 }
 
 //TODO: Mejorar validaciones: de tipo y de jerarquia
+//TODO: Añadir region poligonos

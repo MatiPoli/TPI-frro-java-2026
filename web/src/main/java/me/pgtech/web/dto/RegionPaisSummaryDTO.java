@@ -1,22 +1,15 @@
 package me.pgtech.web.dto;
 
-public class RangoUsuarioDTO {
+public class RegionPaisSummaryDTO {
 
-    private Long id;
+    private long id;
     private String nombre;
 
-    public RangoUsuarioDTO() {
-    }
-
-    public RangoUsuarioDTO(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
