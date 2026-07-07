@@ -3,6 +3,7 @@
 <%@ page import="me.pgtech.web.dto.PaisDetailDTO" %>
 <%
     request.setAttribute("tituloPagina", "Países");
+    request.setAttribute("anchoCompleto", true);
 %>
 <%@ include file="/WEB-INF/vistas/fragmentos/header.jsp" %>
 
@@ -24,6 +25,7 @@
         <%
             } else {
         %>
+            <div class="table-responsive">
                 <table class="table table-striped align-middle mb-0">
                     <thead>
                         <tr>
@@ -57,6 +59,7 @@
                                     <td><%= pais.getWebToken() %></td>
                                     <td class="text-end">
                                         <a href="<%= request.getContextPath() %>/paises/regiones?paisId=<%= pais.getId() %>" class="btn btn-sm btn-outline-primary">Regiones</a>
+                                        <a href="<%= request.getContextPath() %>/paises/divisiones?paisId=<%= pais.getId() %>" class="btn btn-sm btn-outline-primary">Divisiones</a>
                                         <a href="<%= request.getContextPath() %>/paises?id=<%= pais.getId() %>" class="btn btn-sm btn-outline-primary">Editar</a>
 
                                         <form method="post" action="<%= request.getContextPath() %>/paises/eliminar" class="d-inline" onsubmit="return confirm('¿Seguro que querés eliminar este país?');">
@@ -70,6 +73,7 @@
                         %>
                     </tbody>
                 </table>
+            </div>
         <%
             }
         %>

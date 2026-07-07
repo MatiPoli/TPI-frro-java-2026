@@ -255,25 +255,28 @@ footer {
     line-height: 1;
 }
 
-.page-link {
+.pagination {
+    --bs-pagination-bg: var(--bg-panel);
+    --bs-pagination-border-color: var(--borde);
+    --bs-pagination-color: var(--texto-principal);
+    --bs-pagination-hover-bg: var(--acento-primario);
+    --bs-pagination-hover-border-color: var(--acento-primario);
+    --bs-pagination-hover-color: #fff;
+    --bs-pagination-active-bg: var(--acento-primario);
+    --bs-pagination-active-border-color: var(--acento-primario);
+    --bs-pagination-disabled-bg: var(--bg-principal);
+    --bs-pagination-disabled-border-color: var(--borde);
+    --bs-pagination-disabled-color: var(--texto-muted);
+}
+
+.form-select {
     background-color: var(--bg-panel);
     border-color: var(--borde);
     color: var(--texto-principal);
 }
 
-.page-link:hover {
-    background-color: var(--acento-primario);
+.form-select:focus {
+    background-color: var(--bg-panel);
+    color: var(--texto-principal);
     border-color: var(--acento-primario);
-    color: #fff;
-}
-
-.page-item.active .page-link {
-    background-color: var(--acento-primario);
-    border-color: var(--acento-primario);
-}
-
-.page-item.disabled .page-link {
-    background-color: var(--bg-principal);
-    color: var(--texto-muted);
-    border-color: var(--borde);
 }

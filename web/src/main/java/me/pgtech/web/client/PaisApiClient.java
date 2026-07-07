@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import me.pgtech.web.dto.PaisDetailDTO;
 import me.pgtech.web.dto.RegionPaisDetailDTO;
 import me.pgtech.web.dto.RegionPaisSummaryDTO;
+import me.pgtech.web.dto.DivisionSummaryDTO;
 import me.pgtech.web.dto.PaginaDTO;
 
 public class PaisApiClient {
@@ -62,6 +63,12 @@ public class PaisApiClient {
     public void eliminar(Long paisId, Long regionId) throws IOException {
         StringBuilder url = new StringBuilder(BASE_URL + "/" + paisId + "/regiones/" + regionId);
         http.delete(url.toString());
+    }
+
+    public PaginaDTO<DivisionSummaryDTO> listarDivisiones(Long paisId, int page, int size) throws IOException {
+        StringBuilder url = new StringBuilder(BASE_URL + "/" + paisId + "/divisiones" + "?page=" + page + "&size=" + size);
+        String json = http.get(url.toString());
+        return gson.fromJson(json, new TypeToken<PaginaDTO<DivisionSummaryDTO>>(){}.getType());
     }
 
 }

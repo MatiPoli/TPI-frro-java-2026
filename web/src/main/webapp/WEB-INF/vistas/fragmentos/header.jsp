@@ -78,4 +78,9 @@
     </div>
 </nav>
 
-<main class="container mt-4 mb-5">
+<%
+    boolean anchoCompleto = Boolean.TRUE.equals(request.getAttribute("anchoCompleto"));
+    String claseContenedor = anchoCompleto ? "container-fluid px-4" : "container";
+%>
+
+<main class="<%= claseContenedor %> mt-4 mb-5">
