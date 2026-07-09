@@ -4,8 +4,8 @@
     String tituloPagina = (tituloObj != null) ? tituloObj.toString() : "BTE Cono Sur";
 
     String rango = (String) session.getAttribute("rango");
-    Object player = session.getAttribute("player");
-    String nombrePublico = (player != null) ? request.getAttribute("nombrePublico") + "" : "";
+    Object sessionPlayer = session.getAttribute("player");
+    String nombrePublico = (sessionPlayer != null) ? request.getAttribute("nombrePublico") + "" : "";
     // Si guardás el nombre directo en sesión (como en el test-login), usá esto en su lugar:
     // String nombrePublico = (String) session.getAttribute("nombreJugador");
 
@@ -67,7 +67,7 @@
                 <% } %>
             </ul>
 
-            <% if (player != null) { %>
+            <% if (sessionPlayer != null) { %>
                 <span class="navbar-text text-light me-3">
                     <%= nombrePublico %>
                     <span class="badge bg-secondary"><%= rango %></span>

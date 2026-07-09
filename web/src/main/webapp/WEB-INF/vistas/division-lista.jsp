@@ -4,6 +4,7 @@
 <%@ page import="me.pgtech.web.dto.PaginaDTO" %>
 <%
     request.setAttribute("tituloPagina", "Divisiones");
+    request.setAttribute("anchoCompleto", true);
     PaginaDTO<DivisionSummaryDTO> pagina = (PaginaDTO<DivisionSummaryDTO>) request.getAttribute("pagina");
 %>
 <%@ include file="/WEB-INF/vistas/fragmentos/header.jsp" %>

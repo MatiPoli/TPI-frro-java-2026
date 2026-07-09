@@ -280,3 +280,9 @@ footer {
     color: var(--texto-principal);
     border-color: var(--acento-primario);
 }
+
+.list-group-item {
+    background-color: var(--bg-panel);
+    border-color: var(--borde);
+    color: var(--texto-principal);
+}

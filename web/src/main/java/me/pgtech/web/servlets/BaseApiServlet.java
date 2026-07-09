@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.UUID;
 
 public abstract class BaseApiServlet extends HttpServlet {
 
@@ -40,6 +41,18 @@ public abstract class BaseApiServlet extends HttpServlet {
             return Integer.parseInt(valor);
         } catch (NumberFormatException e) {
             return porDefecto;
+        }
+    }
+
+    protected UUID parsearUUID(HttpServletRequest req, String param) {
+        String valor = req.getParameter(param);
+        if (valor == null || valor.isBlank()) {
+            throw new IllegalArgumentException("Falta el parámetro: " + param);
+        }
+        try {
+            return UUID.fromString(valor);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("El parámetro " + param + " no es un UUID válido");
         }
     }
     

@@ -5,6 +5,7 @@
 <%@ page import="me.pgtech.web.dto.PaginaDTO" %>
 <%
     request.setAttribute("tituloPagina", "Divisiones");
+    request.setAttribute("anchoCompleto", true);
     PaginaDTO<DivisionSummaryDTO> pagina = (PaginaDTO<DivisionSummaryDTO>) request.getAttribute("pagina");
     PaisDetailDTO pais = (PaisDetailDTO) request.getAttribute("pais");
 %>
@@ -37,6 +38,7 @@
                                 <th>NAM</th>
                                 <th>GNA</th>
                                 <th>FNA</th>
+                                <th>Contexto</th>
                                 <th class="text-end">Acciones</th>
                             </tr>
                         </thead>
@@ -50,6 +52,7 @@
                                         <td><%= divisionItem.getNam() %></td>
                                         <td><%= divisionItem.getGna() %></td>
                                         <td><%= divisionItem.getFna() %></td>
+                                        <td><%= divisionItem.getContexto() %></td>
                                         <td class="text-end">
                                             <a href="<%= request.getContextPath() %>/divisiones/regiones?divisionId=<%= divisionItem.getId() %>"
                                                class="btn btn-sm btn-outline-primary">Regiones</a>
@@ -89,10 +92,10 @@
         <nav class="mt-3">
             <ul class="pagination justify-content-center flex-wrap">
                 <li class="page-item <%= paginaActual == 0 ? "disabled" : "" %>">
-                    <a class="page-link" href="<%= request.getContextPath() %>/paises/divisiones?page=0">&laquo;&laquo;</a>
+                    <a class="page-link" href="<%= request.getContextPath() %>/paises/divisiones?page=0&paisId=<%= pais.getId() %>">&laquo;&laquo;</a>
                 </li>
                 <li class="page-item <%= paginaActual == 0 ? "disabled" : "" %>">
-                    <a class="page-link" href="<%= request.getContextPath() %>/paises/divisiones?page=<%= paginaActual - 1 %>">Anterior</a>
+                    <a class="page-link" href="<%= request.getContextPath() %>/paises/divisiones?page=<%= paginaActual - 1 %>&paisId=<%= pais.getId() %>">Anterior</a>
                 </li>
 
                 <% if (desde > 0) { %>
@@ -103,7 +106,7 @@
                     for (int i = desde; i <= hasta; i++) {
                 %>
                         <li class="page-item <%= i == paginaActual ? "active" : "" %>">
-                            <a class="page-link" href="<%= request.getContextPath() %>/paises/divisiones?page=<%= i %>"><%= i + 1 %></a>
+                            <a class="page-link" href="<%= request.getContextPath() %>/paises/divisiones?page=<%= i %>&paisId=<%= pais.getId() %>"><%= i + 1 %></a>
                         </li>
                 <%
                     }
@@ -114,10 +117,10 @@
                 <% } %>
 
                 <li class="page-item <%= paginaActual >= totalPaginas - 1 ? "disabled" : "" %>">
-                    <a class="page-link" href="<%= request.getContextPath() %>/paises/divisiones?page=<%= paginaActual + 1 %>">Siguiente</a>
+                    <a class="page-link" href="<%= request.getContextPath() %>/paises/divisiones?page=<%= paginaActual + 1 %>&paisId=<%= pais.getId() %>">Siguiente</a>
                 </li>
                 <li class="page-item <%= paginaActual >= totalPaginas - 1 ? "disabled" : "" %>">
-                    <a class="page-link" href="<%= request.getContextPath() %>/paises/divisiones?page=<%= totalPaginas - 1 %>">&raquo;&raquo;</a>
+                    <a class="page-link" href="<%= request.getContextPath() %>/paises/divisiones?page=<%= totalPaginas - 1 %>&paisId=<%= pais.getId() %>">&raquo;&raquo;</a>
                 </li>
             </ul>
             <p class="text-center text-muted small">

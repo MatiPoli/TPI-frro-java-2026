@@ -1,7 +1,6 @@
 package me.pgtech.web.client;
 
 import java.io.IOException;
-import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -11,7 +10,6 @@ import me.pgtech.web.dto.DivisionSummaryDTO;
 import me.pgtech.web.dto.PaginaDTO;
 import me.pgtech.web.dto.RegionDivisionDetailDTO;
 import me.pgtech.web.dto.RegionDivisionSummaryDTO;
-import me.pgtech.web.dto.RegionPaisDetailDTO;
 
 public class DivisionApiClient {
 
