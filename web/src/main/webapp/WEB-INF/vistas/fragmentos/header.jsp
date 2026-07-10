@@ -52,6 +52,12 @@
                     </li>
                 <% } %>
 
+                <% if ("Reviewer".equals(rango)) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%= request.getContextPath() %>/reviewer">Revisión</a>
+                    </li>
+                <% } %>
+
                 <% if (esAdmin) { %>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">

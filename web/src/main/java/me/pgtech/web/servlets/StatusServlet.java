@@ -22,7 +22,7 @@ public class StatusServlet extends HttpServlet {
         resp.setContentType("application/json;charset=UTF-8");
         try {
             HttpRequest apiRequest = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:7070/api/status"))
+                .uri(URI.create("http://192.168.1.8:8080/api/status"))
                 .GET()
                 .build();
             client.send(apiRequest, HttpResponse.BodyHandlers.ofString());
