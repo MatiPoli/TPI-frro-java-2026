@@ -43,8 +43,10 @@ public class PlayerServlet extends BaseApiServlet {
             }
 
             int page = obtenerEntero(req, "page", 0);
-            PaginaDTO<PlayerSummaryDTO> pagina = client.listar(page, TAMANO_PAGINA);
+            String nombreFiltro = req.getParameter("nombre");
+            PaginaDTO<PlayerSummaryDTO> pagina = client.listar(page, TAMANO_PAGINA, nombreFiltro);
             req.setAttribute("pagina", pagina);
+            req.setAttribute("nombreFiltro", nombreFiltro);
             req.getRequestDispatcher("/WEB-INF/vistas/player-lista.jsp").forward(req, resp);
 
         } catch (IllegalArgumentException e) {

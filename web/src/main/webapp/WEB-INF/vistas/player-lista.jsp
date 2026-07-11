@@ -14,6 +14,29 @@
     <a href="<%= request.getContextPath() %>/admin" class="btn btn-outline-secondary">Volver al panel</a>
 </div>
 
+<%
+    String nombreFiltro = (String) request.getAttribute("nombreFiltro");
+    String nombreFiltroVal = (nombreFiltro != null) ? nombreFiltro : "";
+    String filtroQs = (nombreFiltro != null && !nombreFiltro.isBlank())
+        ? "&nombre=" + java.net.URLEncoder.encode(nombreFiltro, java.nio.charset.StandardCharsets.UTF_8)
+        : "";
+%>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <form method="get" action="<%= request.getContextPath() %>/players" class="row g-2 align-items-end">
+            <div class="col-auto">
+                <label for="nombre" class="form-label mb-1">Buscar por nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="<%= nombreFiltroVal %>" placeholder="Nombre de Minecraft">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-outline-primary">Buscar</button>
+                <a href="<%= request.getContextPath() %>/players" class="btn btn-outline-secondary">Limpiar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div class="card">
     <div class="card-body">
         <%
@@ -83,10 +106,10 @@
         <nav class="mt-3">
             <ul class="pagination justify-content-center flex-wrap">
                 <li class="page-item <%= paginaActual == 0 ? "disabled" : "" %>">
-                    <a class="page-link" href="<%= request.getContextPath() %>/players?page=0">&laquo;&laquo;</a>
+                    <a class="page-link" href="<%= request.getContextPath() %>/players?page=0<%= filtroQs %>">&laquo;&laquo;</a>
                 </li>
                 <li class="page-item <%= paginaActual == 0 ? "disabled" : "" %>">
-                    <a class="page-link" href="<%= request.getContextPath() %>/players?page=<%= paginaActual - 1 %>">Anterior</a>
+                    <a class="page-link" href="<%= request.getContextPath() %>/players?page=<%= paginaActual - 1 %><%= filtroQs %>">Anterior</a>
                 </li>
 
                 <% if (desde > 0) { %>
@@ -97,7 +120,7 @@
                     for (int i = desde; i <= hasta; i++) {
                 %>
                         <li class="page-item <%= i == paginaActual ? "active" : "" %>">
-                            <a class="page-link" href="<%= request.getContextPath() %>/players?page=<%= i %>"><%= i + 1 %></a>
+                            <a class="page-link" href="<%= request.getContextPath() %>/players?page=<%= i %><%= filtroQs %>"><%= i + 1 %></a>
                         </li>
                 <%
                     }
@@ -108,10 +131,10 @@
                 <% } %>
 
                 <li class="page-item <%= paginaActual >= totalPaginas - 1 ? "disabled" : "" %>">
-                    <a class="page-link" href="<%= request.getContextPath() %>/players?page=<%= paginaActual + 1 %>">Siguiente</a>
+                    <a class="page-link" href="<%= request.getContextPath() %>/players?page=<%= paginaActual + 1 %><%= filtroQs %>">Siguiente</a>
                 </li>
                 <li class="page-item <%= paginaActual >= totalPaginas - 1 ? "disabled" : "" %>">
-                    <a class="page-link" href="<%= request.getContextPath() %>/players?page=<%= totalPaginas - 1 %>">&raquo;&raquo;</a>
+                    <a class="page-link" href="<%= request.getContextPath() %>/players?page=<%= totalPaginas - 1 %><%= filtroQs %>">&raquo;&raquo;</a>
                 </li>
             </ul>
             <p class="text-center text-muted small">

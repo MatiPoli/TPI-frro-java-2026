@@ -50,8 +50,10 @@ public class ProyectoServlet extends BaseApiServlet {
             }
 
             int page = obtenerEntero(req, "page", 0);
-            PaginaDTO<ProyectoSummaryDTO> pagina = client.listar(page, TAMANO_PAGINA);
+            String idFiltro = req.getParameter("idFiltro");
+            PaginaDTO<ProyectoSummaryDTO> pagina = client.listar(page, TAMANO_PAGINA, idFiltro);
             req.setAttribute("pagina", pagina);
+            req.setAttribute("idFiltro", idFiltro);
             req.getRequestDispatcher("/WEB-INF/vistas/proyecto-lista.jsp").forward(req, resp);
 
         } catch (IOException e) {

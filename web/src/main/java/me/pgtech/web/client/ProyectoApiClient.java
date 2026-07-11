@@ -1,6 +1,8 @@
 package me.pgtech.web.client;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,8 +22,12 @@ public class ProyectoApiClient {
     private final ApiHttpClient http = new ApiHttpClient();
     private final Gson gson = new Gson();
 
-    public PaginaDTO<ProyectoSummaryDTO> listar(int page, int size) throws IOException {
-        String json = http.get(BASE_URL + "?page=" + page + "&size=" + size);
+    public PaginaDTO<ProyectoSummaryDTO> listar(int page, int size, String idFiltro) throws IOException {
+        StringBuilder url = new StringBuilder(BASE_URL + "?page=" + page + "&size=" + size);
+        if (idFiltro != null && !idFiltro.isBlank()) {
+            url.append("&id=").append(URLEncoder.encode(idFiltro, StandardCharsets.UTF_8));
+        }
+        String json = http.get(url.toString());
         return gson.fromJson(json, new TypeToken<PaginaDTO<ProyectoSummaryDTO>>(){}.getType());
     }
 

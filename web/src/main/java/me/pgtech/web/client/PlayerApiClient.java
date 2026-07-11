@@ -1,6 +1,8 @@
 package me.pgtech.web.client;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,8 +26,12 @@ public class PlayerApiClient {
         return gson.fromJson(json, PlayerDetailDTO.class);
     }
 
-    public PaginaDTO<PlayerSummaryDTO> listar(int page, int size) throws IOException {
-        String json = http.get(BASE_URL + "?page=" + page + "&size=" + size);
+    public PaginaDTO<PlayerSummaryDTO> listar(int page, int size, String nombreFiltro) throws IOException {
+        StringBuilder url = new StringBuilder(BASE_URL + "?page=" + page + "&size=" + size);
+        if (nombreFiltro != null && !nombreFiltro.isBlank()) {
+            url.append("&nombre=").append(URLEncoder.encode(nombreFiltro, StandardCharsets.UTF_8));
+        }
+        String json = http.get(url.toString());
         return gson.fromJson(json, new TypeToken<PaginaDTO<PlayerSummaryDTO>>(){}.getType());
     }
 
