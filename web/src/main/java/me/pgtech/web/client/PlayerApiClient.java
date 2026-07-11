@@ -19,6 +19,11 @@ public class PlayerApiClient {
     private final ApiHttpClient http = new ApiHttpClient();
     private final Gson gson = new Gson();
 
+    public PlayerDetailDTO obtenerPorDiscordId(Long discordId) throws IOException {
+        String json = http.get(BASE_URL + "/discord/" + discordId);
+        return gson.fromJson(json, PlayerDetailDTO.class);
+    }
+
     public PaginaDTO<PlayerSummaryDTO> listar(int page, int size) throws IOException {
         String json = http.get(BASE_URL + "?page=" + page + "&size=" + size);
         return gson.fromJson(json, new TypeToken<PaginaDTO<PlayerSummaryDTO>>(){}.getType());

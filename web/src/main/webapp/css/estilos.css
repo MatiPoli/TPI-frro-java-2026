@@ -295,3 +295,25 @@ dl dt {
 dl dd {
     color: var(--texto-principal);
 }
+
+.avatar-discord {
+    width: 40px !important;
+    height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    border-radius: 50% !important;
+    border: 2px solid var(--borde);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.navbar-text {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-text .badge {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}

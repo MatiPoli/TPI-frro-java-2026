@@ -1,16 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="me.pgtech.web.dto.PlayerDetailDTO" %>
 <%
     Object tituloObj = request.getAttribute("tituloPagina");
     String tituloPagina = (tituloObj != null) ? tituloObj.toString() : "BTE Cono Sur";
 
     String rango = (String) session.getAttribute("rango");
-    Object sessionPlayer = session.getAttribute("player");
-    String nombrePublico = (sessionPlayer != null) ? request.getAttribute("nombrePublico") + "" : "";
-    // Si guardás el nombre directo en sesión (como en el test-login), usá esto en su lugar:
-    // String nombrePublico = (String) session.getAttribute("nombreJugador");
+    PlayerDetailDTO sessionPlayer = (PlayerDetailDTO) session.getAttribute("player");
+    String nombrePublico = (sessionPlayer != null) ? sessionPlayer.getNombrePublico() : "";
 
     boolean esAdmin = "Admin".equals(rango);
     boolean esAdminOReviewer = "Admin".equals(rango) || "Reviewer".equals(rango);
+
+    boolean anchoCompleto = Boolean.TRUE.equals(request.getAttribute("anchoCompleto"));
+    String claseContenedor = anchoCompleto ? "container-fluid px-4" : "container";
+
+    String discordAvatarUrl = (String) session.getAttribute("discordAvatarUrl");
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,8 +27,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="<%= request.getContextPath() %>/css/estilos.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/css/estilos.css" rel="stylesheet">
 </head>
 <body>
 
@@ -74,19 +81,21 @@
             </ul>
 
             <% if (sessionPlayer != null) { %>
-                <span class="navbar-text text-light me-3">
-                    <%= nombrePublico %>
-                    <span class="badge bg-secondary"><%= rango %></span>
-                </span>
+                <div class="d-flex align-items-center gap-2 me-3">
+                    <% if (discordAvatarUrl != null) { %>
+                        <img src="<%= discordAvatarUrl %>" alt="Avatar" class="avatar-discord">
+                    <% } %>
+                    <a href="<%= request.getContextPath() %>/perfil" class="navbar-text text-light d-flex align-items-center gap-2 mb-0 text-decoration-none">
+                        <span class="badge bg-secondary"><%= rango %></span>
+                        <%= nombrePublico %>
+                    </a>
+                </div>
                 <a href="<%= request.getContextPath() %>/logout" class="btn btn-outline-light btn-sm">Salir</a>
+            <% } else { %>
+                <a href="<%= request.getContextPath() %>/login" class="btn btn-primary btn-sm">Ingresar con Discord</a>
             <% } %>
         </div>
     </div>
 </nav>
-
-<%
-    boolean anchoCompleto = Boolean.TRUE.equals(request.getAttribute("anchoCompleto"));
-    String claseContenedor = anchoCompleto ? "container-fluid px-4" : "container";
-%>
 
 <main class="<%= claseContenedor %> mt-4 mb-5">
