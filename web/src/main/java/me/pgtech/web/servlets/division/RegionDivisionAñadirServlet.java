@@ -22,7 +22,7 @@ public class RegionDivisionAñadirServlet extends BaseApiServlet {
             Long divisionId = parsearId(req, "divisionId");
             dto.setNombre(req.getParameter("nombre"));
             dto.setPolygon(req.getParameter("polygon"));
-
+            System.out.println("POLYGON RECIBIDO: " + dto.getPolygon());
             client.añadir(divisionId, dto);
             resp.sendRedirect(req.getContextPath() + "/divisiones/regiones?divisionId=" + divisionId);
         } catch (IOException e) {

@@ -35,6 +35,7 @@ public class RegionPaisServlet extends BaseApiServlet {
             req.setAttribute("pais", pais);
 
             if (path.endsWith("/nuevo")) {
+                req.setAttribute("regionesContexto", client.listarRegionesMapaDePais(paisId));
                 req.getRequestDispatcher("/WEB-INF/vistas/region-pais-form.jsp").forward(req, resp);
                 return;
             }

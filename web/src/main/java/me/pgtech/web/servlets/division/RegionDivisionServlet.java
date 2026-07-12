@@ -35,6 +35,7 @@ public class RegionDivisionServlet extends BaseApiServlet {
             req.setAttribute("division", division);
 
             if (path.endsWith("/nuevo")) {
+                req.setAttribute("regionesContexto", client.listarRegionesMapaDeDivision(divisionId));
                 req.getRequestDispatcher("/WEB-INF/vistas/region-division-form.jsp").forward(req, resp);
                 return;
             }

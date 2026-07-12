@@ -30,6 +30,10 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+    <script src="<%= request.getContextPath() %>/js/mapa-poligono.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<%= request.getContextPath() %>/css/estilos.css" rel="stylesheet">
 </head>
@@ -51,6 +55,16 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="<%= request.getContextPath() %>/proyectos">Proyectos</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Mapas
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="<%= request.getContextPath() %>/proyectos/mapa">Mapa de Proyectos</a></li>
+                        <li><a class="dropdown-item" href="<%= request.getContextPath() %>/paises/mapa">Mapa de Países</a></li>
+                        <li><a class="dropdown-item" href="<%= request.getContextPath() %>/divisiones/mapa">Mapa de Divisiones</a></li>
+                    </ul>
                 </li>
 
                 <% if (esAdminOReviewer) { %>

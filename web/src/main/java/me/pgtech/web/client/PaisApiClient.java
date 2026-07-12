@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import me.pgtech.web.dto.PaisDetailDTO;
 import me.pgtech.web.dto.RegionPaisDetailDTO;
+import me.pgtech.web.dto.RegionPaisMapaDTO;
 import me.pgtech.web.dto.RegionPaisSummaryDTO;
 import me.pgtech.web.dto.DivisionSummaryDTO;
 import me.pgtech.web.dto.PaginaDTO;
@@ -18,6 +19,16 @@ public class PaisApiClient {
     private final ApiHttpClient http = new ApiHttpClient();
     private final Gson gson = new Gson();
 
+    public List<RegionPaisMapaDTO> listarTodasLasRegionesMapa() throws IOException {
+        String json = http.get(BASE_URL + "/regiones/mapa");
+        return gson.fromJson(json, new TypeToken<List<RegionPaisMapaDTO>>(){}.getType());
+    }
+
+    public List<RegionPaisMapaDTO> listarRegionesMapaDePais(Long paisId) throws IOException {
+        String json = http.get(BASE_URL + "/" + paisId + "/regiones-mapa");
+        return gson.fromJson(json, new TypeToken<List<RegionPaisMapaDTO>>(){}.getType());
+    }
+    
     public List<PaisDetailDTO> listar() throws IOException {
         String json = http.get(BASE_URL);
         return gson.fromJson(json, new TypeToken<List<PaisDetailDTO>>(){}.getType());

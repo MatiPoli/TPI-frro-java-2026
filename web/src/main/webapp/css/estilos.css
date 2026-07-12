@@ -211,6 +211,24 @@ footer {
     border: 1px solid var(--borde);
 }
 
+#mapaPoligono {
+    height: 400px;
+    border-radius: 0.375rem;
+    border: 1px solid var(--borde);
+}
+
+.leaflet-bar a {
+    background-color: var(--bg-panel) !important;
+    color: var(--texto-principal) !important;
+    border-color: var(--borde) !important;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+    background-color: var(--bg-panel);
+    color: var(--texto-principal);
+}
+
 .logo-footer {
     height: var(--logo-height-footer);
 }

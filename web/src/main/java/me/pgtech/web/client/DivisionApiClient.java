@@ -1,6 +1,7 @@
 package me.pgtech.web.client;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -9,6 +10,7 @@ import me.pgtech.web.dto.DivisionDetailDTO;
 import me.pgtech.web.dto.DivisionSummaryDTO;
 import me.pgtech.web.dto.PaginaDTO;
 import me.pgtech.web.dto.RegionDivisionDetailDTO;
+import me.pgtech.web.dto.RegionDivisionMapaDTO;
 import me.pgtech.web.dto.RegionDivisionSummaryDTO;
 
 public class DivisionApiClient {
@@ -17,6 +19,16 @@ public class DivisionApiClient {
 
     private final ApiHttpClient http = new ApiHttpClient();
     private final Gson gson = new Gson();
+
+    public List<RegionDivisionMapaDTO> listarTodasLasRegionesMapa() throws IOException {
+        String json = http.get(BASE_URL + "/regiones/mapa");
+        return gson.fromJson(json, new TypeToken<List<RegionDivisionMapaDTO>>(){}.getType());
+    }
+
+    public List<RegionDivisionMapaDTO> listarRegionesMapaDeDivision(Long divisionId) throws IOException {
+        String json = http.get(BASE_URL + "/" + divisionId + "/regiones-mapa");
+        return gson.fromJson(json, new TypeToken<List<RegionDivisionMapaDTO>>(){}.getType());
+    }
 
     public PaginaDTO<DivisionSummaryDTO> listar(int page, int size) throws IOException {
         StringBuilder url = new StringBuilder(BASE_URL + "?page=" + page + "&size=" + size);

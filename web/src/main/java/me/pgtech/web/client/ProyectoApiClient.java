@@ -13,6 +13,7 @@ import me.pgtech.web.dto.PaginaDTO;
 import me.pgtech.web.dto.FinishRequestDTO;
 import me.pgtech.web.dto.PlayerSummaryDTO;
 import me.pgtech.web.dto.ProyectoDetailDTO;
+import me.pgtech.web.dto.ProyectoMapaDTO;
 import me.pgtech.web.dto.ProyectoSummaryDTO;
 
 public class ProyectoApiClient {
@@ -21,6 +22,11 @@ public class ProyectoApiClient {
 
     private final ApiHttpClient http = new ApiHttpClient();
     private final Gson gson = new Gson();
+
+    public List<ProyectoMapaDTO> listarParaMapa() throws IOException {
+        String json = http.get(BASE_URL + "/mapa");
+        return gson.fromJson(json, new TypeToken<List<ProyectoMapaDTO>>(){}.getType());
+    }
 
     public PaginaDTO<ProyectoSummaryDTO> listar(int page, int size, String idFiltro) throws IOException {
         StringBuilder url = new StringBuilder(BASE_URL + "?page=" + page + "&size=" + size);
