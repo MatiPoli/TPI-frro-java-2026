@@ -13,7 +13,6 @@ import me.pgtech.web.client.DiscordOAuthClient;
 public class LoginServlet extends HttpServlet {
 
     private final DiscordOAuthClient discordClient = new DiscordOAuthClient();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.sendRedirect(discordClient.construirUrlAutorizacion());

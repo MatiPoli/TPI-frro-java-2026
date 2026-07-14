@@ -1,5 +1,8 @@
 package me.pgtech.web.servlets.session.filters;
 
+import java.io.IOException;
+import java.util.List;
+
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -9,14 +12,14 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import me.pgtech.web.dto.PaisSummaryDTO;
+import me.pgtech.web.client.ProyectoApiClient;
 import me.pgtech.web.dto.PlayerDetailDTO;
+import me.pgtech.web.dto.ProyectoDetailDTO;
 
-import java.io.IOException;
-import java.util.List;
+@WebFilter({"/proyectos/solicitudes", "/proyectos/solicitudes/aceptar", "/proyectos/solicitudes/rechazar", "/proyectos/finalizar", "/proyectos/actualizar"})
+public class LiderAccessFilter implements Filter {
 
-@WebFilter({"/reviewer", "/reviewer/*"})
-public class ReviewerAccessFilter implements Filter {
+    private final ProyectoApiClient client = new ProyectoApiClient();
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
@@ -32,8 +35,12 @@ public class ReviewerAccessFilter implements Filter {
         }
 
         PlayerDetailDTO player = (PlayerDetailDTO) session.getAttribute("player");
-        List<PaisSummaryDTO> paisesReviewer = player.getPaisesReviewer();
-        if (paisesReviewer == null || paisesReviewer.isEmpty()) {
+        String proyectoId = req.getParameter("proyectoId");
+        if (proyectoId == null) {
+            throw new IllegalArgumentException("Falta el parámetro: proyectoId");
+        }
+        ProyectoDetailDTO proyecto = client.obtener(proyectoId);
+        if (!player.getId().equals(proyecto.getLider().getId())) {
             response.sendError(HttpServletResponse.SC_FORBIDDEN, "No tenés permisos para acceder a esta sección");
             return;
         }

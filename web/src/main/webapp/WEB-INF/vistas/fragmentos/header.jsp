@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="me.pgtech.web.dto.PlayerDetailDTO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="me.pgtech.web.dto.PaisSummaryDTO" %>
 <%
     Object tituloObj = request.getAttribute("tituloPagina");
     String tituloPagina = (tituloObj != null) ? tituloObj.toString() : "BTE Cono Sur";
@@ -7,9 +9,11 @@
     String rango = (String) session.getAttribute("rango");
     PlayerDetailDTO sessionPlayer = (PlayerDetailDTO) session.getAttribute("player");
     String nombrePublico = (sessionPlayer != null) ? sessionPlayer.getNombrePublico() : "";
-
+    List<PaisSummaryDTO> paisesReviewer = (sessionPlayer != null) ? sessionPlayer.getPaisesReviewer() : null;
     boolean esAdmin = "Admin".equals(rango);
-    boolean esAdminOReviewer = "Admin".equals(rango) || "Reviewer".equals(rango);
+    boolean esReviewer = paisesReviewer != null && !paisesReviewer.isEmpty();
+    boolean esAdminOReviewer = esAdmin || esReviewer;
+    boolean loggedIn = (sessionPlayer != null);
 
     boolean anchoCompleto = Boolean.TRUE.equals(request.getAttribute("anchoCompleto"));
     String claseContenedor = anchoCompleto ? "container-fluid px-4" : "container";
@@ -53,9 +57,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarMain">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="<%= request.getContextPath() %>/proyectos">Proyectos</a>
-                </li>
+                <% if (loggedIn) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%= request.getContextPath() %>/proyectos">Proyectos</a>
+                    </li>
+                <% } %>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                         Mapas
@@ -67,40 +73,32 @@
                     </ul>
                 </li>
 
-                <% if (esAdminOReviewer) { %>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<%= request.getContextPath() %>/players">Jugadores</a>
-                    </li>
-                <% } %>
-
-                <% if ("Reviewer".equals(rango)) { %>
+                <% if (esReviewer) { %>
                     <li class="nav-item">
                         <a class="nav-link" href="<%= request.getContextPath() %>/reviewer">Revisión</a>
                     </li>
                 <% } %>
 
                 <% if (esAdmin) { %>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            Administración
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="<%= request.getContextPath() %>/tipos-usuario">Tipos de Usuario</a></li>
-                            <li><a class="dropdown-item" href="<%= request.getContextPath() %>/rangos">Rangos</a></li>
-                            <li><a class="dropdown-item" href="<%= request.getContextPath() %>/tipos-proyecto">Tipos de Proyecto</a></li>
-                            <li><a class="dropdown-item" href="<%= request.getContextPath() %>/paises">Países</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%= request.getContextPath() %>/admin">Administración</a>
                     </li>
                 <% } %>
             </ul>
 
-            <% if (sessionPlayer != null) { %>
+            <% if (loggedIn) { %>
                 <div class="d-flex align-items-center gap-2 me-3">
                     <% if (discordAvatarUrl != null) { %>
                         <img src="<%= discordAvatarUrl %>" alt="Avatar" class="avatar-discord">
                     <% } %>
                     <a href="<%= request.getContextPath() %>/perfil" class="navbar-text text-light d-flex align-items-center gap-2 mb-0 text-decoration-none">
-                        <span class="badge bg-secondary"><%= rango %></span>
+                        <% if (esAdmin) { %>
+                            <span class="badge bg-danger">Admin</span>
+                        <% } else if (esReviewer) { %>
+                            <span class="badge bg-warning">Reviewer</span>
+                        <% } else { %>
+                            <span class="badge bg-secondary"><%= rango %></span>
+                        <% } %>
                         <%= nombrePublico %>
                     </a>
                 </div>

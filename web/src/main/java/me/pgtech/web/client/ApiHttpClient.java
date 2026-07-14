@@ -11,7 +11,7 @@ import java.time.Duration;
 public class ApiHttpClient {
 
     private final HttpClient client = HttpClient.newBuilder()
-        .connectTimeout(Duration.ofSeconds(3))
+        .connectTimeout(Duration.ofSeconds(8))
         .build();
 
     public String get(String url) throws IOException {
@@ -34,7 +34,7 @@ public class ApiHttpClient {
         try {
             HttpRequest.Builder builder = HttpRequest.newBuilder()
                 .uri(URI.create(url))
-                .timeout(Duration.ofSeconds(5))
+                .timeout(Duration.ofSeconds(30))
                 .header("Content-Type", "application/json; charset=UTF-8");
 
             builder = (body != null)

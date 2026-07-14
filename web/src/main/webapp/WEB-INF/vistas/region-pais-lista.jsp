@@ -14,7 +14,7 @@
     <h1 class="mb-0">Regiones de <%= pais.getNombre() %></h1>
     <div class="d-flex gap-2">
         <a href="<%= request.getContextPath() %>/paises?paisId=<%= pais.getId() %>" class="btn btn-outline-secondary">Volver</a>
-        <a href="<%= request.getContextPath() %>/paises/regiones/añadir?paisId=<%= pais.getId() %>" class="btn btn-primary">+ Nueva</a>
+        <a href="<%= request.getContextPath() %>/paises/regiones/nuevo?paisId=<%= pais.getId() %>" class="btn btn-primary">+ Nueva</a>
     </div>
 </div>
 

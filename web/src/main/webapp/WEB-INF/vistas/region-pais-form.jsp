@@ -1,6 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="me.pgtech.web.dto.RegionPaisDetailDTO" %>
 <%@ page import="me.pgtech.web.dto.PaisDetailDTO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="me.pgtech.web.dto.RegionPaisMapaDTO" %>
+<%@ page import="com.google.gson.JsonArray" %>
+<%@ page import="com.google.gson.JsonObject" %>
+<%@ page import="com.google.gson.JsonParser" %>
 <%
     RegionPaisDetailDTO regionEditar = (RegionPaisDetailDTO) request.getAttribute("region");
     PaisDetailDTO pais = (PaisDetailDTO) request.getAttribute("pais");
@@ -11,12 +16,6 @@
         ? regionEditar.getPolygon().replace("\"", "\\\"")
         : "";
 %>
-
-<%@ page import="java.util.List" %>
-<%@ page import="me.pgtech.web.dto.RegionPaisMapaDTO" %>
-<%@ page import="com.google.gson.JsonArray" %>
-<%@ page import="com.google.gson.JsonObject" %>
-<%@ page import="com.google.gson.JsonParser" %>
 <%
     List<RegionPaisMapaDTO> regionesContexto = (List<RegionPaisMapaDTO>) request.getAttribute("regionesContexto");
     JsonArray capasContexto = new JsonArray();
@@ -69,12 +68,15 @@
     </div>
 </div>
 
+<script id="capasContextoData" type="application/json"><%= capasContextoJson %></script>
 <script>
+    const capasContextoParsed = JSON.parse(document.getElementById('capasContextoData').textContent);
+
     initMapaPoligono({
         mapElementId: 'mapaPoligono',
         inputPolygonId: 'polygon',
         geoJsonInicial: "<%= polygonInicial %>" || null,
-        capasContexto: "<%= capasContextoJson %>"
+        capasContexto: capasContextoParsed
     });
 
     // Validación simple: no dejar enviar el form sin polígono dibujado

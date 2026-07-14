@@ -14,9 +14,6 @@
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h1 class="mb-0">Proyectos</h1>
-    <% if (esAdmin) { %>
-        <a href="<%= request.getContextPath() %>/admin" class="btn btn-outline-secondary">Volver al panel</a>
-    <% } %>
 </div>
 
 <%
@@ -84,19 +81,11 @@
                                         <td><%= proyectoItem.getFechaTerminado() != null ? sdfLista.format(proyectoItem.getFechaTerminado()) : "-" %></td>
                                         <td><%= proyectoItem.getTipoProyecto() != null ? proyectoItem.getTipoProyecto().getNombre() : "-" %></td>
                                         <td><%= proyectoItem.getLider() != null ? proyectoItem.getLider().getNombrePublico() : "-" %></td>
-                                        <td><%= proyectoItem.getDivision() != null ? proyectoItem.getDivision().getNombre() : "-" %></td>
+                                        <td><%= proyectoItem.getDivision() != null ? proyectoItem.getDivision().getContexto() + ", " + proyectoItem.getDivision().getNam() : "-" %></td>
                                         <td class="text-end">
                                             <div class="d-flex flex-wrap gap-1 justify-content-end">
                                                 <a href="<%= request.getContextPath() %>/proyectos?id=<%= proyectoItem.getId() %>"
-                                                   class="btn btn-sm btn-outline-primary">Ver / Editar</a>
-                                                <a href="<%= request.getContextPath() %>/proyectos/miembros?proyectoId=<%= proyectoItem.getId() %>"
-                                                   class="btn btn-sm btn-outline-primary">Miembros</a>
-                                                <a href="<%= request.getContextPath() %>/proyectos/solicitudes?proyectoId=<%= proyectoItem.getId() %>"
-                                                   class="btn btn-sm btn-outline-primary">Solicitudes</a>
-                                                <form method="post" action="<%= request.getContextPath() %>/proyectos/unirse" class="d-inline">
-                                                    <input type="hidden" name="proyectoId" value="<%= proyectoItem.getId() %>"/>
-                                                    <button type="submit" class="btn btn-sm btn-outline-success">Unirse</button>
-                                                </form>
+                                                   class="btn btn-sm btn-outline-primary">Ver</a>
                                             </div>
                                         </td>
                                     </tr>

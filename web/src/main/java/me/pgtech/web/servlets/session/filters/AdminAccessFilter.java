@@ -12,15 +12,19 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter({"/admin", "/admin/*", "/tipos-usuario/*", "/rangos/*", "/tipos-proyecto/*", "/paises/*", "/divisiones/*"})
+@WebFilter({"/admin", "/admin/*", "/tipos-usuario/*", "/rangos/*", "/tipos-proyecto/*", "/paises/*", "/divisiones/*", "/players/*"})
 public class AdminAccessFilter implements Filter {
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-            throws IOException, ServletException {
-
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
+
+        String uri = request.getRequestURI();
+        if (uri.equals(request.getContextPath() + "/paises/mapa") || uri.equals(request.getContextPath() + "/divisiones/mapa")) {
+            chain.doFilter(request, response);
+            return;
+        }
 
         HttpSession session = request.getSession(false);
 

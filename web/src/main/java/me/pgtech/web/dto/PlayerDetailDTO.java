@@ -1,6 +1,6 @@
 package me.pgtech.web.dto;
 
-import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class PlayerDetailDTO {
@@ -14,6 +14,7 @@ public class PlayerDetailDTO {
     private RangoUsuarioDTO rangoUsuario;
     private TipoUsuarioDTO tipoUsuario;
     private PaisSummaryDTO paisPrefix;
+    private List<PaisSummaryDTO> paisesReviewer;
 
     public PlayerDetailDTO() {
     }
@@ -88,6 +89,14 @@ public class PlayerDetailDTO {
 
     public void setPaisPrefix(PaisSummaryDTO paisPrefix) {
         this.paisPrefix = paisPrefix;
+    }
+
+    public List<PaisSummaryDTO> getPaisesReviewer() {
+        return paisesReviewer;
+    }
+
+    public void setPaisesReviewer(List<PaisSummaryDTO> paisesReviewer) {
+        this.paisesReviewer = paisesReviewer;
     }
 
 }

@@ -16,16 +16,6 @@
             </div>
         </div>
     </div>
-
-    <div class="col-md-6 col-lg-4">
-        <div class="card h-100">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Proyectos</h5>
-                <p class="card-text text-muted">Ver el listado completo de proyectos del servidor.</p>
-                <a href="<%= request.getContextPath() %>/proyectos" class="btn btn-outline-primary btn-sm mt-auto align-self-start">Ver proyectos</a>
-            </div>
-        </div>
-    </div>
 </div>
 
 <%@ include file="/WEB-INF/vistas/fragmentos/footer.jsp" %>

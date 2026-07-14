@@ -15,7 +15,7 @@ import me.pgtech.web.dto.RegionDivisionSummaryDTO;
 
 public class DivisionApiClient {
 
-    private static final String BASE_URL = "http://192.168.1.8:8080/api/division";
+    private static final String BASE_URL = "http://localhost:7070/api/division";
 
     private final ApiHttpClient http = new ApiHttpClient();
     private final Gson gson = new Gson();

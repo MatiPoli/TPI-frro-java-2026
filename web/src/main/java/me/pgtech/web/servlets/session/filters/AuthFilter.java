@@ -1,4 +1,4 @@
-package me.pgtech.web.servlets.session;
+package me.pgtech.web.servlets.session.filters;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -17,7 +17,7 @@ import java.util.Set;
 public class AuthFilter implements Filter {
 
     private static final Set<String> RUTAS_PUBLICAS = Set.of(
-        "/login", "/callback", "/login-error", "/", "/status", "/css", "/img"
+        "/login", "/callback", "/login-error", "/", "/status", "/css", "/img", "/proyectos/mapa", "/paises/mapa", "/divisiones/mapa"
     );
 
     @Override

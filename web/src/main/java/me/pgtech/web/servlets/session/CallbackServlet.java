@@ -42,12 +42,10 @@ public class CallbackServlet extends HttpServlet {
             session.setAttribute("discordAvatarUrl", avatarUrl);
             session.setAttribute("player", player);
             session.setAttribute("rango", player.getRangoUsuario() != null ? player.getRangoUsuario().getNombre() : null);
-            session.setAttribute("paisReviewerId", player.getPaisPrefix() != null ? player.getPaisPrefix().getId() : null);
 
             resp.sendRedirect(req.getContextPath() + "/");
 
         } catch (IOException e) {
-            // Puede ser 404 (no vinculado) u otro error de red/API
             if (e.getMessage() != null && e.getMessage().contains("404")) {
                 resp.sendRedirect(req.getContextPath() + "/login-error?motivo=no-vinculado");
             } else {

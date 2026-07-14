@@ -35,15 +35,20 @@ public class ProyectoServlet extends BaseApiServlet {
                 req.setAttribute("proyecto", proyecto);
                 req.setAttribute("tipos", tipoClient.listar());
 
-                // Chequeo de solicitud pendiente propia
                 HttpSession session = req.getSession(false);
-                if (session != null && session.getAttribute("player") != null) {
-                    PlayerDetailDTO playerLogueado = (PlayerDetailDTO) session.getAttribute("player");
-                    List<PlayerSummaryDTO> solicitudes = client.obtenerSolicitudes(idParam);
-                    boolean yaSolicito = solicitudes.stream()
-                        .anyMatch(p -> p.getId().equals(playerLogueado.getId()));
-                    req.setAttribute("yaSolicitoUnion", yaSolicito);
-                }
+                PlayerDetailDTO playerLogueado = (PlayerDetailDTO) session.getAttribute("player");
+
+                List<PlayerSummaryDTO> solicitudes = client.obtenerSolicitudes(idParam);
+                boolean yaSolicito = solicitudes.stream().anyMatch(p -> p.getId().equals(playerLogueado.getId()));
+                req.setAttribute("yaSolicitoUnion", yaSolicito);
+
+                List<PlayerSummaryDTO> miembros = client.listarMiembros(idParam);
+                boolean esMiembro = miembros.stream().anyMatch(p -> p.getId().equals(playerLogueado.getId()));
+                req.setAttribute("esMiembro", esMiembro);
+
+                boolean esLider = proyecto.getLider() != null && proyecto.getLider().getId().equals(playerLogueado.getId());
+                req.setAttribute("esLider", esLider);
+                
 
                 req.getRequestDispatcher("/WEB-INF/vistas/proyecto-form.jsp").forward(req, resp);
                 return;

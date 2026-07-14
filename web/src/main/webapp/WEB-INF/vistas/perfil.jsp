@@ -34,6 +34,7 @@
                 <dt class="col-sm-5">Última conexión</dt>
                 <dd class="col-sm-7"><%= player.getFechaUltimaConexion() != null ? sdf.format(player.getFechaUltimaConexion()) : "-" %></dd>
             </dl>
+            <a href="<%= request.getContextPath() %>/proyectos/player" class="btn btn-sm btn-outline-primary">Mis Proyectos</a>
         </div>
     </div>
 

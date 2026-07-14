@@ -1,7 +1,5 @@
 package me.pgtech.web.dto;
 
-import java.util.Date;
-
 public class ProyectoSummaryDTO {
 
     private String id;

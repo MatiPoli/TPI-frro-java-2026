@@ -18,8 +18,7 @@ public class ProyectoMapaServlet extends BaseApiServlet {
     private final ProyectoApiClient client = new ProyectoApiClient();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             List<ProyectoMapaDTO> proyectos = client.listarParaMapa();
             req.setAttribute("proyectos", proyectos);

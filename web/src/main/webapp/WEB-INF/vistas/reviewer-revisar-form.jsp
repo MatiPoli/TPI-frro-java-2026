@@ -3,6 +3,7 @@
 <%
     ProyectoDetailDTO proyecto = (ProyectoDetailDTO) request.getAttribute("proyecto");
     request.setAttribute("tituloPagina", "Revisar: " + proyecto.getNombre());
+    Boolean esPostulante = (Boolean) request.getAttribute("esPostulante");
 %>
 <%@ include file="/WEB-INF/vistas/fragmentos/header.jsp" %>
 
@@ -42,10 +43,12 @@
                           placeholder="Opcional: motivo de aprobación o rechazo"></textarea>
             </div>
 
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="promote" form="formAprobar" name="promote">
-                <label class="form-check-label" for="promote">Ascender al líder al aprobar</label>
-            </div>
+            <% if (esPostulante) { %>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="promote" form="formAprobar" name="promote">
+                    <label class="form-check-label" for="promote">Ascender al líder al aprobar</label>
+                </div>
+            <% } %>
 
             <div class="d-flex gap-2">
                 <form method="post" id="formAprobar" action="<%= request.getContextPath() %>/reviewer/finalizaciones/aprobar">

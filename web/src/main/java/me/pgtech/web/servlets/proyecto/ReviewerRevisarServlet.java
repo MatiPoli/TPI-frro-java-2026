@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import me.pgtech.web.client.ProyectoApiClient;
+import me.pgtech.web.dto.PlayerSummaryDTO;
 import me.pgtech.web.dto.ProyectoDetailDTO;
 import me.pgtech.web.servlets.BaseApiServlet;
 
@@ -26,7 +27,10 @@ public class ReviewerRevisarServlet extends BaseApiServlet {
             }
 
             ProyectoDetailDTO proyecto = client.obtener(proyectoId);
+            PlayerSummaryDTO player = proyecto.getLider();
+            boolean esPostulante = player.getTipoUsuario().getNombre().equals("Postulante") ;
             req.setAttribute("proyecto", proyecto);
+            req.setAttribute("esPostulante", esPostulante);
             req.getRequestDispatcher("/WEB-INF/vistas/reviewer-revisar-form.jsp").forward(req, resp);
 
         } catch (IllegalArgumentException e) {

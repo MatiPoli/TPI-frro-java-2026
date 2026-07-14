@@ -32,7 +32,9 @@
                                 <th>Tipo de Usuario</th>
                                 <th>Rango</th>
                                 <th>País</th>
-                                <th class="text-end">Acciones</th>
+                                <$ if (esAdmin) { %>
+                                    <th class="text-end">Acciones</th>
+                                <% } %>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,10 +47,12 @@
                                         <td><%= miembroItem.getTipoUsuario() != null ? miembroItem.getTipoUsuario().getNombre() : "-" %></td>
                                         <td><%= miembroItem.getRangoUsuario() != null ? miembroItem.getRangoUsuario().getNombre() : "-" %></td>
                                         <td><%= miembroItem.getPaisPrefix() != null ? miembroItem.getPaisPrefix().getNombre() : "-" %></td>
-                                        <td class="text-end">
-                                            <a href="<%= request.getContextPath() %>/players?id=<%= miembroItem.getId() %>"
-                                               class="btn btn-sm btn-outline-primary">Ver jugador</a>
-                                        </td>
+                                        <% if (esAdmin) { %>
+                                            <td class="text-end">
+                                                <a href="<%= request.getContextPath() %>/players?id=<%= miembroItem.getId() %>"
+                                                   class="btn btn-sm btn-outline-primary">Ver jugador</a>
+                                            </td>
+                                        <% } %>
                                     </tr>
                             <%
                                 }

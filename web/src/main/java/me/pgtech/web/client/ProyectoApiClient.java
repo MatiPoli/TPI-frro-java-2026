@@ -18,7 +18,7 @@ import me.pgtech.web.dto.ProyectoSummaryDTO;
 
 public class ProyectoApiClient {
 
-    private static final String BASE_URL = "http://192.168.1.8:8080/api/proyecto";
+    private static final String BASE_URL = "http://localhost:7070/api/proyecto";
 
     private final ApiHttpClient http = new ApiHttpClient();
     private final Gson gson = new Gson();
@@ -37,9 +37,9 @@ public class ProyectoApiClient {
         return gson.fromJson(json, new TypeToken<PaginaDTO<ProyectoSummaryDTO>>(){}.getType());
     }
 
-    public PaginaDTO<ProyectoSummaryDTO> listarFinalizaciones(int page, int size) throws IOException {
-        String json = http.get(BASE_URL + "/finalizaciones?page=" + page + "&size=" + size);
-        return gson.fromJson(json, new TypeToken<PaginaDTO<ProyectoSummaryDTO>>(){}.getType());
+    public List<ProyectoSummaryDTO> listarFinalizaciones(UUID staffId) throws IOException {
+        String json = http.get(BASE_URL + "/finalizaciones" + "?staffId=" + staffId);
+        return gson.fromJson(json, new TypeToken<List<ProyectoSummaryDTO>>(){}.getType());
     }
 
     public ProyectoDetailDTO obtener(String id) throws IOException {
