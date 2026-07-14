@@ -2,10 +2,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="me.pgtech.web.dto.ProyectoSummaryDTO" %>
-<%@ page import="me.pgtech.web.dto.PaginaDTO" %>
+<
 <%
     request.setAttribute("tituloPagina", "Finalizaciones Pendientes");
-    PaginaDTO<ProyectoSummaryDTO> pagina = (PaginaDTO<ProyectoSummaryDTO>) request.getAttribute("pagina");
+    List<ProyectoSummaryDTO> proyectos = (List<ProyectoSummaryDTO>) request.getAttribute("finalizaciones");
     SimpleDateFormat sdfFin = new SimpleDateFormat("dd/MM/yyyy");
 %>
 <%@ include file="/WEB-INF/vistas/fragmentos/header.jsp" %>
@@ -18,10 +18,9 @@
 <div class="card">
     <div class="card-body">
         <%
-            List<ProyectoSummaryDTO> proyectos = (pagina != null) ? pagina.getContent() : null;
             if (proyectos == null || proyectos.isEmpty()) {
         %>
-                <p class="text-muted mb-0">No hay finalizaciones pendientes para tu país.</p>
+                <p class="text-muted mb-0">No hay finalizaciones pendientes para los países que sos Reviewer.</p>
         <%
             } else {
         %>
@@ -65,51 +64,5 @@
         %>
     </div>
 </div>
-
-<%
-    if (pagina != null && pagina.getTotalPages() > 1) {
-        int paginaActual = pagina.getPage();
-        int totalPaginas = pagina.getTotalPages();
-        int rangoPaginas = 2;
-        int desde = Math.max(0, paginaActual - rangoPaginas);
-        int hasta = Math.min(totalPaginas - 1, paginaActual + rangoPaginas);
-%>
-        <nav class="mt-3">
-            <ul class="pagination justify-content-center flex-wrap">
-                <li class="page-item <%= paginaActual == 0 ? "disabled" : "" %>">
-                    <a class="page-link" href="<%= request.getContextPath() %>/reviewer/finalizaciones?page=0">&laquo;&laquo;</a>
-                </li>
-                <li class="page-item <%= paginaActual == 0 ? "disabled" : "" %>">
-                    <a class="page-link" href="<%= request.getContextPath() %>/reviewer/finalizaciones?page=<%= paginaActual - 1 %>">Anterior</a>
-                </li>
-                <% if (desde > 0) { %>
-                    <li class="page-item disabled"><span class="page-link">...</span></li>
-                <% } %>
-                <%
-                    for (int i = desde; i <= hasta; i++) {
-                %>
-                        <li class="page-item <%= i == paginaActual ? "active" : "" %>">
-                            <a class="page-link" href="<%= request.getContextPath() %>/reviewer/finalizaciones?page=<%= i %>"><%= i + 1 %></a>
-                        </li>
-                <%
-                    }
-                %>
-                <% if (hasta < totalPaginas - 1) { %>
-                    <li class="page-item disabled"><span class="page-link">...</span></li>
-                <% } %>
-                <li class="page-item <%= paginaActual >= totalPaginas - 1 ? "disabled" : "" %>">
-                    <a class="page-link" href="<%= request.getContextPath() %>/reviewer/finalizaciones?page=<%= paginaActual + 1 %>">Siguiente</a>
-                </li>
-                <li class="page-item <%= paginaActual >= totalPaginas - 1 ? "disabled" : "" %>">
-                    <a class="page-link" href="<%= request.getContextPath() %>/reviewer/finalizaciones?page=<%= totalPaginas - 1 %>">&raquo;&raquo;</a>
-                </li>
-            </ul>
-            <p class="text-center text-muted small">
-                Página <%= paginaActual + 1 %> de <%= totalPaginas %> - <%= pagina.getTotalElements() %> proyectos en total
-            </p>
-        </nav>
-<%
-    }
-%>
 
 <%@ include file="/WEB-INF/vistas/fragmentos/footer.jsp" %>

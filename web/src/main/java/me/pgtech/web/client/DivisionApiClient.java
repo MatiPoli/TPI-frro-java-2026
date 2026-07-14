@@ -20,8 +20,9 @@ public class DivisionApiClient {
     private final ApiHttpClient http = new ApiHttpClient();
     private final Gson gson = new Gson();
 
-    public List<RegionDivisionMapaDTO> listarTodasLasRegionesMapa() throws IOException {
-        String json = http.get(BASE_URL + "/regiones/mapa");
+    public List<RegionDivisionMapaDTO> listarTodasLasRegionesMapa(Long paisId) throws IOException {
+        String url = BASE_URL + "/regiones/mapa?paisId=" + paisId;
+        String json = http.get(url);
         return gson.fromJson(json, new TypeToken<List<RegionDivisionMapaDTO>>(){}.getType());
     }
 

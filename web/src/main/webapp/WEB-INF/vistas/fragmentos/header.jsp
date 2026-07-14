@@ -59,9 +59,10 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <% if (loggedIn) { %>
                     <li class="nav-item">
-                        <a class="nav-link" href="<%= request.getContextPath() %>/proyectos">Proyectos</a>
+                        <a class="nav-link" href="<%= request.getContextPath() %>/home">Home</a>
                     </li>
                 <% } %>
+                
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                         Mapas
@@ -69,9 +70,15 @@
                     <ul class="dropdown-menu dropdown-menu-dark">
                         <li><a class="dropdown-item" href="<%= request.getContextPath() %>/proyectos/mapa">Mapa de Proyectos</a></li>
                         <li><a class="dropdown-item" href="<%= request.getContextPath() %>/paises/mapa">Mapa de Países</a></li>
-                        <li><a class="dropdown-item" href="<%= request.getContextPath() %>/divisiones/mapa">Mapa de Divisiones</a></li>
+                        <li><a class="dropdown-item" href="<%= request.getContextPath() %>/divisiones/mapa?paisId=1">Mapa de Divisiones</a></li>
                     </ul>
                 </li>
+
+                <% if (loggedIn) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%= request.getContextPath() %>/proyectos">Proyectos</a>
+                    </li>
+                <% } %>
 
                 <% if (esReviewer) { %>
                     <li class="nav-item">

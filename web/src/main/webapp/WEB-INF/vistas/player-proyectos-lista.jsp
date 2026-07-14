@@ -63,7 +63,7 @@
                                     <tr>
                                         <td><%= proyectoItem.getId() %></td>
                                         <td><%= proyectoItem.getNombre() %></td>
-                                        <td><%= proyectoItem.getDescripcion() %></td>
+                                        <td><%= proyectoItem.getDescripcion() != null && !proyectoItem.getDescripcion().isBlank() ? proyectoItem.getDescripcion() : "-" %></td>
                                         <td><span class="badge bg-secondary"><%= proyectoItem.getEstado() %></span></td>
                                         <td><%= proyectoItem.getTamaño() %></td>
                                         <td><%= proyectoItem.getFechaCreado() != null ? sdfLista.format(proyectoItem.getFechaCreado()) : "-" %></td>
@@ -75,8 +75,6 @@
                                             <div class="d-flex flex-wrap gap-1 justify-content-end">
                                                 <a href="<%= request.getContextPath() %>/proyectos?id=<%= proyectoItem.getId() %>"
                                                    class="btn btn-sm btn-outline-primary">Ver</a>
-                                                <a href="<%= request.getContextPath() %>/proyectos/miembros?proyectoId=<%= proyectoItem.getId() %>"
-                                                   class="btn btn-sm btn-outline-primary">Miembros</a>
                                             </div>
                                         </td>
                                     </tr>

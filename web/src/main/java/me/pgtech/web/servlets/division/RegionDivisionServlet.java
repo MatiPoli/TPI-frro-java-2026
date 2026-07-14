@@ -45,6 +45,7 @@ public class RegionDivisionServlet extends BaseApiServlet {
                 Long regionId = parsearId(req, "regionId");
                 RegionDivisionDetailDTO region = client.obtener(divisionId, regionId);
                 req.setAttribute("region", region);
+                req.setAttribute("regionesContexto", client.listarRegionesMapaDeDivision(divisionId));
                 req.getRequestDispatcher("/WEB-INF/vistas/region-division-form.jsp").forward(req, resp);
                 return;
             }

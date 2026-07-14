@@ -16,9 +16,9 @@ import java.util.Set;
 @WebFilter("/*")
 public class AuthFilter implements Filter {
 
-    private static final Set<String> RUTAS_PUBLICAS = Set.of(
-        "/login", "/callback", "/login-error", "/", "/status", "/css", "/img", "/proyectos/mapa", "/paises/mapa", "/divisiones/mapa"
-    );
+    private static final Set<String> RUTAS_EXACTAS = Set.of("/index.jsp", "", "/", "/login", "/callback", "/login-error", "/status", "/proyectos/mapa", "/paises/mapa", "/divisiones/mapa");
+
+    private static final Set<String> RECURSOS_PUBLICOS = Set.of("/css/", "/img/", "/js/");
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
@@ -27,7 +27,8 @@ public class AuthFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
 
         String path = request.getServletPath();
-        boolean esPublica = RUTAS_PUBLICAS.stream().anyMatch(path::startsWith);
+
+        boolean esPublica = RUTAS_EXACTAS.contains(path) || RECURSOS_PUBLICOS.stream().anyMatch(path::startsWith);
 
         if (esPublica) {
             chain.doFilter(req, res);
@@ -42,5 +43,4 @@ public class AuthFilter implements Filter {
 
         chain.doFilter(req, res);
     }
-    
 }

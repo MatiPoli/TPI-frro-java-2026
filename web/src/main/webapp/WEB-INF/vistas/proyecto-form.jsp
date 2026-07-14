@@ -56,7 +56,7 @@
                     <dd class="col-sm-8"><%= proyecto.getNombre() %></dd>
 
                     <dt class="col-sm-4">Descripción</dt>
-                    <dd class="col-sm-8"><%= proyecto.getDescripcion() != null ? proyecto.getDescripcion() : "-" %></dd>
+                    <dd class="col-sm-8"><%= proyecto.getDescripcion() != null && !proyecto.getDescripcion().isBlank() ? proyecto.getDescripcion() : "-" %></dd>
                 <% } %>
 
                 <dt class="col-sm-4">Estado</dt>
@@ -78,17 +78,17 @@
                 <dd class="col-sm-8"><%= proyecto.getLider() != null ? proyecto.getLider().getNombrePublico() : "-" %></dd>
 
                 <dt class="col-sm-4">División</dt>
-                <dd class="col-sm-8"><%= proyectoItem.getDivision() != null ? proyectoItem.getDivision().getContexto() + ", " + proyectoItem.getDivision().getNam() : "-" %></dd>
+                <dd class="col-sm-8"><%= proyecto.getDivision() != null ? proyecto.getDivision().getContexto() + ", " + proyecto.getDivision().getNam() : "-" %></dd>
 
                 <dt class="col-sm-4">País</dt>
                 <dd class="col-sm-8">
-                    <%= (proyecto.getDivision() != null && proyecto.getDivision().getPais() != null) ? proyecto.getDivision().getPais().getNombre() : "-" %>
+                    <%= (proyecto.getDivision() != null && proyecto.getDivision().getPais() != null) ? proyecto.getDivision().getPais().getNombrePublico() : "-" %>
                 </dd>
             </dl>
         </div>
     </div>
 
-    <div class="card" style="max-width: 650px; width: 100%;">
+    <div class="card mb-3" style="max-width: 650px; width: 100%;">
         <div class="card-body">
             <h5 class="card-title mb-3">Acciones</h5>
             <div class="d-flex flex-wrap gap-2">
@@ -121,6 +121,33 @@
             </div>
         </div>
     </div>
+
+    <div class="card mb-3" style="max-width: 650px; width: 100%;">
+        <div class="card-body">
+            <h5 class="card-title mb-3">Ubicación</h5>
+            <% if (proyecto.getPoligono() != null) { %>
+                <div id="mapaProyectoDetalle" style="height: 350px; border-radius: 0.375rem; border: 1px solid var(--borde);"></div>
+            <% } else { %>
+                <p class="text-muted mb-0">Este proyecto no tiene un polígono cargado.</p>
+            <% } %>
+        </div>
+    </div>
 </div>
+
+<% if (proyecto.getPoligono() != null) { %>
+<script id="poligonoProyectoData" type="application/json"><%= proyecto.getPoligono() %></script>
+<script>
+    const geoPoligonoProyecto = JSON.parse(document.getElementById('poligonoProyectoData').textContent);
+
+    const mapaDetalle = L.map('mapaProyectoDetalle', { zoomControl: true });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(mapaDetalle);
+
+    const capaProyecto = L.geoJSON(geoPoligonoProyecto, {
+        style: { color: '#2f6fed', weight: 2, fillOpacity: 0.25 }
+    }).addTo(mapaDetalle);
+
+    mapaDetalle.fitBounds(capaProyecto.getBounds());
+</script>
+<% } %>
 
 <%@ include file="/WEB-INF/vistas/fragmentos/footer.jsp" %>

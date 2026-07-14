@@ -37,7 +37,7 @@
 <%@ include file="/WEB-INF/vistas/fragmentos/header.jsp" %>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1 class="mb-0">Mapa de Países</h1>
+    <h1 class="mb-0 h3">Mapa de Países</h1>
     <a href="<%= request.getContextPath() %>/paises" class="btn btn-outline-secondary">Volver al listado</a>
 </div>
 

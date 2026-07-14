@@ -15,7 +15,7 @@
             <h5 class="card-title mb-3"><%= proyecto.getNombre() %></h5>
             <dl class="row mb-0">
                 <dt class="col-sm-4">Descripción</dt>
-                <dd class="col-sm-8"><%= proyecto.getDescripcion() %></dd>
+                <dd class="col-sm-8"><%= proyecto.getDescripcion() != null && !proyecto.getDescripcion().isBlank() ? proyecto.getDescripcion() : "-" %></dd>
 
                 <dt class="col-sm-4">Tamaño</dt>
                 <dd class="col-sm-8"><%= proyecto.getTamaño() %></dd>
@@ -29,7 +29,7 @@
                 <dt class="col-sm-4">País</dt>
                 <dd class="col-sm-8">
                     <%= (proyecto.getDivision() != null && proyecto.getDivision().getPais() != null)
-                            ? proyecto.getDivision().getPais().getNombre() : "-" %>
+                            ? proyecto.getDivision().getPais().getNombrePublico() : "-" %>
                 </dd>
             </dl>
         </div>
@@ -42,8 +42,7 @@
                 <textarea class="form-control" id="comentario" form="formAprobar" name="comentario" rows="3"
                           placeholder="Opcional: motivo de aprobación o rechazo"></textarea>
             </div>
-
-            <% if (esPostulante) { %>
+            <% if (Boolean.TRUE.equals(esPostulante)) { %>
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="promote" form="formAprobar" name="promote">
                     <label class="form-check-label" for="promote">Ascender al líder al aprobar</label>

@@ -43,7 +43,7 @@
 <%@ include file="/WEB-INF/vistas/fragmentos/header.jsp" %>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1 class="mb-0">Mapa de Proyectos</h1>
+    <h1 class="mb-0 h3">Mapa de Proyectos</h1>
     <a href="<%= request.getContextPath() %>/proyectos" class="btn btn-outline-secondary">Volver al listado</a>
 </div>
 
@@ -66,7 +66,7 @@
 
 <script>
     const dataProyectos = JSON.parse(document.getElementById('geoJsonProyectosData').textContent);
-
+    const isLoggedIn = "<%= loggedIn %>" === "true";
     const coloresPorEstado = {
         'ACTIVO': '#3fb950',
         'EN_CREACION': '#7ec8f5',
@@ -91,13 +91,16 @@
         }),
         onEachFeature: (feature, layer) => {
             const p = feature.properties;
-            layer.bindPopup(
-                '<strong>' + p.id + '</strong><br>' +
-                '<strong>' + p.nombre + '</strong><br>' +
-                'Estado: ' + p.estado + '<br>' +
-                'Líder: ' + p.lider + '<br>' +
-                '<a href="<%= request.getContextPath() %>/proyectos?id=' + p.id + '">Ver proyecto</a>'
-            );
+            let popupContent = '<strong>' + p.id + '</strong><br>' +
+                               '<strong>' + p.nombre + '</strong><br>' +
+                               'Estado: ' + p.estado + '<br>' +
+                               'Líder: ' + p.lider + '<br>';
+
+            if (isLoggedIn) {
+                popupContent += '<a href="<%= request.getContextPath() %>/proyectos?id=' + p.id + '">Ver proyecto</a>';
+            }
+
+            layer.bindPopup(popupContent);
         }
     }).addTo(map);
 

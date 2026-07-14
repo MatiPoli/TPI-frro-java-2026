@@ -42,7 +42,7 @@
                                         <td><%= solicitanteItem.getNombre() %></td>
                                         <td><%= solicitanteItem.getNombrePublico() %></td>
                                         <td><%= solicitanteItem.getTipoUsuario() != null ? solicitanteItem.getTipoUsuario().getNombre() : "-" %></td>
-                                        <td><%= solicitanteItem.getPaisPrefix() != null ? solicitanteItem.getPaisPrefix().getNombre() : "-" %></td>
+                                        <td><%= solicitanteItem.getPaisPrefix() != null ? solicitanteItem.getPaisPrefix().getNombrePublico() : "-" %></td>
                                         <td class="text-end">
                                             <div class="d-flex gap-1 justify-content-end">
                                                 <form method="post" action="<%= request.getContextPath() %>/proyectos/solicitudes/aceptar" class="d-inline">

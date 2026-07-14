@@ -32,7 +32,7 @@
                                 <th>Tipo de Usuario</th>
                                 <th>Rango</th>
                                 <th>País</th>
-                                <$ if (esAdmin) { %>
+                                <% if (esAdmin) { %>
                                     <th class="text-end">Acciones</th>
                                 <% } %>
                             </tr>
@@ -46,7 +46,7 @@
                                         <td><%= miembroItem.getNombrePublico() %></td>
                                         <td><%= miembroItem.getTipoUsuario() != null ? miembroItem.getTipoUsuario().getNombre() : "-" %></td>
                                         <td><%= miembroItem.getRangoUsuario() != null ? miembroItem.getRangoUsuario().getNombre() : "-" %></td>
-                                        <td><%= miembroItem.getPaisPrefix() != null ? miembroItem.getPaisPrefix().getNombre() : "-" %></td>
+                                        <td><%= miembroItem.getPaisPrefix() != null ? miembroItem.getPaisPrefix().getNombrePublico() : "-" %></td>
                                         <% if (esAdmin) { %>
                                             <td class="text-end">
                                                 <a href="<%= request.getContextPath() %>/players?id=<%= miembroItem.getId() %>"

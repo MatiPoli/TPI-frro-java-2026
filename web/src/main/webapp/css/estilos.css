@@ -10,8 +10,12 @@
     --texto-principal: #e6e8ec;
     --texto-muted: #9aa4b2;
     --borde: #26314a;
-    --logo-height-navbar: 60px;
+    --logo-height-navbar: 45px;
     --logo-height-footer: 40px;
+}
+
+html {
+    overflow-y: scroll;
 }
 
 html, body {
@@ -34,8 +38,8 @@ main {
 /* Navbar */
 .navbar {
     background-color: var(--bg-navbar) !important;
-    padding-top: 1.75rem;
-    padding-bottom: 1.75rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
     border-bottom: 1px solid var(--borde);
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
@@ -68,7 +72,7 @@ main {
 .navbar-nav .nav-link {
     color: var(--texto-principal) !important;
     font-weight: 500;
-    font-size: 1.35rem;
+    font-size: 1.1rem;
     padding: 0.6rem 1.25rem !important;
     transition: color 0.15s ease;
 }
@@ -79,7 +83,7 @@ main {
 }
 
 .dropdown-toggle {
-    font-size: 1.05rem;
+    font-size: 0.85rem;
 }
 
 .dropdown-menu-dark {
@@ -88,7 +92,7 @@ main {
 }
 
 .dropdown-menu-dark .dropdown-item {
-    font-size: 1.1rem;
+    font-size: 0.90rem;
     padding: 0.6rem 1.4rem;
     color: var(--texto-principal);
 }
@@ -334,4 +338,61 @@ dl dd {
     display: inline-flex;
     align-items: center;
     line-height: 1;
+}
+
+.hero-landing {
+    position: relative;
+    height: 480px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.hero-landing .carousel,
+.hero-landing .carousel-inner,
+.hero-landing .carousel-item {
+    height: 100%;
+}
+
+.hero-img {
+    height: 480px;
+    object-fit: cover;
+    filter: brightness(0.55);
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,.15);
+    pointer-events: none;
+}
+
+.hero-content {
+    pointer-events: auto;
+    max-width: 700px;
+    padding: 1rem;
+    color: #fff;
+}
+
+.hero-content .lead {
+    color: #e6e8ec;
+}
+
+@media (max-width: 576px) {
+    .hero-landing, .hero-img {
+        height: 340px;
+    }
+    .hero-content .display-5 {
+        font-size: 1.8rem;
+    }
+}
+
+.flag-icon {
+    height: 20px; /* Ajusta la altura según prefieras */
+    width: auto;
+    vertical-align: middle;
+    border-radius: 2px; /* Un pequeño borde redondeado queda bien */
 }

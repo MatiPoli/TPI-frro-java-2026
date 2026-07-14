@@ -45,7 +45,7 @@
                                     boolean seleccionado = paisIdSeleccionado != null && paisIdSeleccionado.equals(paisItem.getId());
                         %>
                                     <option value="<%= paisItem.getId() %>" <%= seleccionado ? "selected" : "" %>>
-                                        <%= paisItem.getNombre() %>
+                                        <%= paisItem.getNombrePublico() %>
                                     </option>
                         <%
                                 }

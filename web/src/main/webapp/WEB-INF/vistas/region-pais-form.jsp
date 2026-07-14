@@ -34,7 +34,7 @@
 <%@ include file="/WEB-INF/vistas/fragmentos/header.jsp" %>
 
 <div class="d-flex flex-column align-items-center">
-    <h1 class="text-center mb-4"><%= esNuevo ? "Nueva Región de " + pais.getNombre() : "Editar Región de " + pais.getNombre() %></h1>
+    <h1 class="text-center mb-4"><%= esNuevo ? "Nueva Región de " + pais.getNombrePublico() : "Editar Región de " + pais.getNombrePublico() %></h1>
 
     <div class="card mb-3" style="max-width: 700px; width: 100%;">
         <div class="card-body">

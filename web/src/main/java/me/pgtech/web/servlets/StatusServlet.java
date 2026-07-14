@@ -26,9 +26,9 @@ public class StatusServlet extends HttpServlet {
                 .GET()
                 .build();
             client.send(apiRequest, HttpResponse.BodyHandlers.ofString());
-            resp.getWriter().write(gson.toJson(Map.of("mensaje", "API de bteCSCore respondiendo OK")));
+            resp.getWriter().write(gson.toJson(Map.of("mensaje", "API disponible")));
         } catch (Exception e) {
-            resp.getWriter().write(gson.toJson(Map.of("mensaje", "API de bteCSCore no disponible")));
+            resp.getWriter().write(gson.toJson(Map.of("mensaje", "API no disponible")));
         }
     }
 }

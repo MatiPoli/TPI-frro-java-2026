@@ -11,7 +11,7 @@
 <%@ include file="/WEB-INF/vistas/fragmentos/header.jsp" %>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1 class="mb-0">Regiones de <%= pais.getNombre() %></h1>
+    <h1 class="mb-0">Regiones de <%= pais.getNombrePublico() %></h1>
     <div class="d-flex gap-2">
         <a href="<%= request.getContextPath() %>/paises?paisId=<%= pais.getId() %>" class="btn btn-outline-secondary">Volver</a>
         <a href="<%= request.getContextPath() %>/paises/regiones/nuevo?paisId=<%= pais.getId() %>" class="btn btn-primary">+ Nueva</a>

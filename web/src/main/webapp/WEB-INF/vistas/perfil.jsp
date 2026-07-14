@@ -57,7 +57,7 @@
                                 for (PaisDetailDTO paisItem : paises) {
                                     boolean sel = paisIdActual != null && paisIdActual.equals(paisItem.getId());
                         %>
-                                    <option value="<%= paisItem.getId() %>" <%= sel ? "selected" : "" %>><%= paisItem.getNombre() %></option>
+                                    <option value="<%= paisItem.getId() %>" <%= sel ? "selected" : "" %>><%= paisItem.getNombrePublico() %></option>
                         <%
                                 }
                             }

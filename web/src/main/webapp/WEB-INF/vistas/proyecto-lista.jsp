@@ -26,16 +26,12 @@
 
 <div class="card mb-3">
     <div class="card-body">
-        <form method="get" action="<%= request.getContextPath() %>/proyectos" class="row g-2 align-items-end">
-            <div class="col-auto">
-                <label for="idFiltro" class="form-label mb-1">Buscar por ID</label>
-                <input type="text" class="form-control" id="idFiltro" name="idFiltro" value="<%= idFiltroVal %>"
-                       placeholder="Ej: AB12CD" maxlength="6">
-            </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-outline-primary">Buscar</button>
-                <a href="<%= request.getContextPath() %>/proyectos" class="btn btn-outline-secondary">Limpiar</a>
-            </div>
+        <form method="get" action="<%= request.getContextPath() %>/proyectos" class="d-flex align-items-center gap-2">
+            <label for="idFiltro" class="form-label mb-0 text-nowrap">Buscar por ID:</label>
+            <input type="text" class="form-control w-auto" id="idFiltro" name="idFiltro" value="<%= idFiltroVal %>"
+                   placeholder="Ej: AB12CD" maxlength="6">
+            <button type="submit" class="btn btn-outline-primary">Buscar</button>
+            <a href="<%= request.getContextPath() %>/proyectos" class="btn btn-outline-secondary">Limpiar</a>
         </form>
     </div>
 </div>
@@ -74,7 +70,7 @@
                                     <tr>
                                         <td><%= proyectoItem.getId() %></td>
                                         <td><%= proyectoItem.getNombre() %></td>
-                                        <td><%= proyectoItem.getDescripcion() %></td>
+                                        <td><%= proyectoItem.getDescripcion() != null && !proyectoItem.getDescripcion().isBlank() ? proyectoItem.getDescripcion() : "-" %></td>
                                         <td><span class="badge bg-secondary"><%= proyectoItem.getEstado() %></span></td>
                                         <td><%= proyectoItem.getTamaño() %></td>
                                         <td><%= proyectoItem.getFechaCreado() != null ? sdfLista.format(proyectoItem.getFechaCreado()) : "-" %></td>
