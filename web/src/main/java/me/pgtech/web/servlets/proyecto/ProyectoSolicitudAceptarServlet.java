@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.UUID;
 
 import me.pgtech.web.client.ProyectoApiClient;
-import me.pgtech.web.dto.PlayerDetailDTO;
 import me.pgtech.web.servlets.BaseApiServlet;
 
 @WebServlet("/proyectos/solicitudes/aceptar")
@@ -26,7 +25,8 @@ public class ProyectoSolicitudAceptarServlet extends BaseApiServlet {
 
 
             client.aceptarSolicitud(proyectoId, playerId);
-            resp.sendRedirect(req.getContextPath() + "/proyectos/solicitudes?proyectoId=" + proyectoId);
+            String baseUrl = req.getContextPath() + "/proyectos/solicitudes?proyectoId=" + proyectoId;
+            resp.sendRedirect(proyectoFormUrlCheck(req, baseUrl));
         } catch (IllegalArgumentException e) {
             manejarError(req, resp, e, "Datos inválidos: " + e.getMessage());
         } catch (IOException e) {

@@ -28,14 +28,18 @@
                     <input type="number" class="form-control" id="maxMiembros" name="maxMiembros" value="<%= esNuevo ? "" : tipoProyecto.getMaxMiembros() %>" required min="0">
                 </div>
 
+
+                <p class="card-text text-muted small mb-3">
+                    Si tamaño mínimo o máximo es -1, no hay límite.
+                </p>
                 <div class="mb-3">
                     <label for="tamanoMin" class="form-label">Tamaño mínimo</label>
-                    <input type="number" class="form-control" id="tamanoMin" name="tamanoMin" value="<%= esNuevo ? "" : tipoProyecto.getTamanoMin() %>" required min="0">
+                    <input type="number" class="form-control" id="tamanoMin" name="tamanoMin" value="<%= esNuevo ? "" : tipoProyecto.getTamanoMin() %>" required min="-1">
                 </div>
 
                 <div class="mb-3">
                     <label for="tamanoMax" class="form-label">Tamaño máximo</label>
-                    <input type="number" class="form-control" id="tamanoMax" name="tamanoMax" value="<%= esNuevo ? "" : tipoProyecto.getTamanoMax() %>" required min="0">
+                    <input type="number" class="form-control" id="tamanoMax" name="tamanoMax" value="<%= esNuevo ? "" : tipoProyecto.getTamanoMax() %>" required min="-1">
                 </div>
 
                 <div class="d-flex gap-2">

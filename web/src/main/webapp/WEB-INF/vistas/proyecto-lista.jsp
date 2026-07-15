@@ -80,7 +80,7 @@
                                         <td><%= proyectoItem.getDivision() != null ? proyectoItem.getDivision().getContexto() + ", " + proyectoItem.getDivision().getNam() : "-" %></td>
                                         <td class="text-end">
                                             <div class="d-flex flex-wrap gap-1 justify-content-end">
-                                                <a href="<%= request.getContextPath() %>/proyectos?id=<%= proyectoItem.getId() %>"
+                                                <a href="<%= request.getContextPath() %>/proyectos?id=<%= proyectoItem.getId() %>&volverA=proyectos"
                                                    class="btn btn-sm btn-outline-primary">Ver</a>
                                             </div>
                                         </td>

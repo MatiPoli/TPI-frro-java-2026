@@ -29,6 +29,7 @@ public class ProyectoSolicitudesServlet extends BaseApiServlet {
             ProyectoDetailDTO proyecto = client.obtener(proyectoId);
             List<PlayerSummaryDTO> solicitudes = client.obtenerSolicitudes(proyectoId);
 
+            proyectoFormAtrributeCheck(req);
             req.setAttribute("proyecto", proyecto);
             req.setAttribute("solicitudes", solicitudes);
             req.getRequestDispatcher("/WEB-INF/vistas/proyecto-solicitudes-lista.jsp").forward(req, resp);

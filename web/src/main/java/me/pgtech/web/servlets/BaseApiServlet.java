@@ -55,5 +55,20 @@ public abstract class BaseApiServlet extends HttpServlet {
             throw new IllegalArgumentException("El parámetro " + param + " no es un UUID válido");
         }
     }
+
+    protected void proyectoFormAtrributeCheck(HttpServletRequest req) {
+        String volverParam = req.getParameter("volverA");
+        if (volverParam == null) return;
+        req.setAttribute("volverA", volverParam);
+    }
+
+    protected String proyectoFormUrlCheck(HttpServletRequest req, String baseUrl) {
+        String volverA = req.getParameter("volverA");
+        if (volverA == null || volverA.isBlank()) {
+            return baseUrl;
+        }
+        String conector = baseUrl.contains("?") ? "&" : "?";
+        return baseUrl + conector + "volverA=" + volverA;
+    }
     
 }

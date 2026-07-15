@@ -23,9 +23,14 @@ public class TipoProyectoCrearServlet extends BaseApiServlet {
             dto.setMaxMiembros(Integer.valueOf(req.getParameter("maxMiembros")));
             dto.setTamanoMin(Integer.valueOf(req.getParameter("tamanoMin")));
             dto.setTamanoMax(Integer.valueOf(req.getParameter("tamanoMax")));
+            if (dto.getTamanoMax() < dto.getTamanoMin()) {
+                throw new IllegalArgumentException("El tamaño máximo debe ser mayor o igual al mínimo.");
+            }
 
             client.crear(dto);
             resp.sendRedirect(req.getContextPath() + "/tipos-proyecto");
+        } catch (IllegalArgumentException e) {
+            manejarError(req, resp, e, "Datos inválidos: " + e.getMessage());
         } catch (IOException e) {
             manejarErrorApi(req, resp, e);
         }

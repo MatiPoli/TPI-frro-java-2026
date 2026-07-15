@@ -25,6 +25,10 @@ public class TipoProyectoActualizarServlet extends BaseApiServlet {
             dto.setTamanoMin(Integer.valueOf(req.getParameter("tamanoMin")));
             dto.setTamanoMax(Integer.valueOf(req.getParameter("tamanoMax")));
 
+            if (dto.getTamanoMax() < dto.getTamanoMin()) {
+                throw new IllegalArgumentException("El tamaño máximo debe ser mayor o igual al mínimo.");
+            }
+            
             client.actualizar(id, dto);
             resp.sendRedirect(req.getContextPath() + "/tipos-proyecto");
         } catch (IllegalArgumentException e) {

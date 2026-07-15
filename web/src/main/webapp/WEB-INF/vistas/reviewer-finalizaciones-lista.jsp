@@ -2,7 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="me.pgtech.web.dto.ProyectoSummaryDTO" %>
-<
+
 <%
     request.setAttribute("tituloPagina", "Finalizaciones Pendientes");
     List<ProyectoSummaryDTO> proyectos = (List<ProyectoSummaryDTO>) request.getAttribute("finalizaciones");

@@ -97,7 +97,7 @@
                                'Líder: ' + p.lider + '<br>';
 
             if (isLoggedIn) {
-                popupContent += '<a href="<%= request.getContextPath() %>/proyectos?id=' + p.id + '">Ver proyecto</a>';
+                popupContent += '<a href="<%= request.getContextPath() %>/proyectos?id=' + p.id + '&volverA=mapa">Ver proyecto</a>';
             }
 
             layer.bindPopup(popupContent);

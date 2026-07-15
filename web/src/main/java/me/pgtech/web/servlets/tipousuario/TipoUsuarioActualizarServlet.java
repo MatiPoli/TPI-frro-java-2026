@@ -21,7 +21,8 @@ public class TipoUsuarioActualizarServlet extends BaseApiServlet {
             Long id = parsearId(req, "id");
             TipoUsuarioDTO dto = new TipoUsuarioDTO();
             dto.setNombre(req.getParameter("nombre"));
-            dto.setCantProyecSim(Integer.valueOf(req.getParameter("maxProyectosSimultaneos")));
+            dto.setDescripcion(req.getParameter("descripcion"));
+            dto.setCantProyecSim(Integer.valueOf(req.getParameter("cantProyecSim")));
 
             client.actualizar(id, dto);
             resp.sendRedirect(req.getContextPath() + "/tipos-usuario");

@@ -51,7 +51,7 @@
         <div class="card h-100">
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">Divisiones</h5>
-                <p class="card-text text-muted">Provincias, comunas, barrios — dependientes de cada país.</p>
+                <p class="card-text text-muted">Provincias, comunas, barrios. Dependientes de cada país.</p>
                 <a href="<%= request.getContextPath() %>/divisiones" class="btn btn-outline-primary btn-sm mt-auto align-self-start">Gestionar</a>
             </div>
         </div>

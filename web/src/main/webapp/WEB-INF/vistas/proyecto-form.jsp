@@ -17,6 +17,7 @@
             || proyecto.getEstado() == me.pgtech.web.dto.Estado.EDITANDO);
 %>
 <%@ include file="/WEB-INF/vistas/fragmentos/header.jsp" %>
+<%@ include file="/WEB-INF/vistas/fragmentos/volver-check.jsp" %>
 
 <div class="d-flex flex-column align-items-center">
     <h1 class="text-center mb-4">Proyecto: <%= proyecto.getId() %></h1>
@@ -26,6 +27,9 @@
             <div class="card-body">
                 <form method="post" action="<%= request.getContextPath() %>/proyectos/actualizar">
                     <input type="hidden" name="id" value="<%= proyecto.getId() %>"/>
+                    <% if (volverA != null && !volverA.isBlank()) { %>
+                        <input type="hidden" name="volverA" value="<%= volverA %>"/>
+                    <% } %>
 
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
@@ -40,8 +44,8 @@
 
                     <div class="d-flex gap-2">
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                        <a href="<%= request.getContextPath() %>/proyectos" class="btn btn-outline-secondary">Volver</a>
                     </div>
+                    
                 </form>
             </div>
         </div>
@@ -91,12 +95,12 @@
     <div class="card mb-3" style="max-width: 650px; width: 100%;">
         <div class="card-body">
             <h5 class="card-title mb-3">Acciones</h5>
-            <div class="d-flex flex-wrap gap-2">
-                <a href="<%= request.getContextPath() %>/proyectos/miembros?proyectoId=<%= proyecto.getId() %>"
-                   class="btn btn-outline-primary">Ver miembros</a>
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+                <a href="<%= urlConVolver(request.getContextPath() + "/proyectos/miembros?proyectoId=" + proyecto.getId(), volverA) %>"
+                class="btn btn-outline-primary">Ver miembros</a>
 
                 <% if (Boolean.TRUE.equals(esLider)) { %>
-                    <a href="<%= request.getContextPath() %>/proyectos/solicitudes?proyectoId=<%= proyecto.getId() %>"
+                    <a href="<%= urlConVolver(request.getContextPath() + "/proyectos/solicitudes?proyectoId=" + proyecto.getId(), volverA) %>"
                     class="btn btn-outline-primary">Ver solicitudes</a>
                 <% } %>
 
@@ -107,14 +111,28 @@
                 <% } else { %>
                     <form method="post" action="<%= request.getContextPath() %>/proyectos/unirse" class="d-inline">
                         <input type="hidden" name="proyectoId" value="<%= proyecto.getId() %>"/>
+                        <% if (volverA != null && !volverA.isBlank()) { %>
+                            <input type="hidden" name="volverA" value="<%= volverA %>"/>
+                        <% } %>
                         <button type="submit" class="btn btn-outline-success">Solicitar unión</button>
                     </form>
+                <% } %>
+
+                <% if (volverPerfil) { %>
+                    <a href="<%= request.getContextPath() %>/proyectos/player" class="btn btn-outline-secondary">Volver</a>
+                <% } else if (volverMapa) { %>
+                    <a href="<%= request.getContextPath() %>/proyectos/mapa" class="btn btn-outline-secondary">Volver</a>
+                <% } else { %>
+                    <a href="<%= request.getContextPath() %>/proyectos" class="btn btn-outline-secondary">Volver</a>
                 <% } %>
 
                 <% if (sinFinalizacion && Boolean.TRUE.equals(esLider)) { %>
                     <form method="post" action="<%= request.getContextPath() %>/proyectos/finalizar" class="d-inline"
                           onsubmit="return confirm('¿Marcar este proyecto como finalizado? Quedará pendiente de revisión.');">
                         <input type="hidden" name="proyectoId" value="<%= proyecto.getId() %>"/>
+                        <% if (volverA != null && !volverA.isBlank()) { %>
+                            <input type="hidden" name="volverA" value="<%= volverA %>"/>
+                        <% } %>
                         <button type="submit" class="btn btn-outline-warning">Marcar como finalizado</button>
                     </form>
                 <% } %>

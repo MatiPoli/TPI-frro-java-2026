@@ -32,6 +32,7 @@ public class ProyectoPlayerServlet extends BaseApiServlet {
 
             req.setAttribute("player", sessionPlayer);
             req.setAttribute("proyectos", proyectos);
+            req.setAttribute("perfil", true);
             req.getRequestDispatcher("/WEB-INF/vistas/player-proyectos-lista.jsp").forward(req, resp);
 
         } catch (IllegalArgumentException e) {

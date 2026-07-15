@@ -23,7 +23,8 @@ public class ProyectoSolicitudRechazarServlet extends BaseApiServlet {
             UUID playerId = UUID.fromString(req.getParameter("playerId"));
 
             client.rechazarSolicitud(proyectoId, playerId);
-            resp.sendRedirect(req.getContextPath() + "/proyectos/solicitudes?proyectoId=" + proyectoId);
+            String baseUrl = req.getContextPath() + "/proyectos/solicitudes?proyectoId=" + proyectoId;
+            resp.sendRedirect(proyectoFormUrlCheck(req, baseUrl));
         } catch (IllegalArgumentException e) {
             manejarError(req, resp, e, "Datos inválidos: " + e.getMessage());
         } catch (IOException e) {

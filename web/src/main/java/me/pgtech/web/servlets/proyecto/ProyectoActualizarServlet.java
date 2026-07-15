@@ -25,7 +25,9 @@ public class ProyectoActualizarServlet extends BaseApiServlet {
             dto.setDescripcion(req.getParameter("descripcion"));
 
             client.actualizar(id, dto);
-            resp.sendRedirect(req.getContextPath() + "/proyectos?id=" + id);
+
+            String baseUrl = req.getContextPath() + "/proyectos?id=" + id;
+            resp.sendRedirect(proyectoFormUrlCheck(req, baseUrl));
         } catch (IOException e) {
             manejarErrorApi(req, resp, e);
         }

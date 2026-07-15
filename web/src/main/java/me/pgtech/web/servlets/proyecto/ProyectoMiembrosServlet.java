@@ -29,6 +29,8 @@ public class ProyectoMiembrosServlet extends BaseApiServlet {
             ProyectoDetailDTO proyecto = client.obtener(proyectoId);
             List<PlayerSummaryDTO> miembros = client.listarMiembros(proyectoId);
 
+            proyectoFormAtrributeCheck(req);
+
             req.setAttribute("proyecto", proyecto);
             req.setAttribute("miembros", miembros);
             req.getRequestDispatcher("/WEB-INF/vistas/proyecto-miembros-lista.jsp").forward(req, resp);

@@ -10,16 +10,16 @@
 <%
     
     PlayerDetailDTO player = (PlayerDetailDTO) request.getAttribute("player");
-    boolean esMismoJugador = (sessionPlayer != null && sessionPlayer.getId().equals(player.getId()));
     List<ProyectoSummaryDTO> proyectos = (List<ProyectoSummaryDTO>) request.getAttribute("proyectos");
     request.setAttribute("tituloPagina", "Proyectos de " + player.getNombrePublico());
-
+    Boolean perfilAtributo = (Boolean) request.getAttribute("perfil");
+    boolean esPerfil = Boolean.TRUE.equals(perfilAtributo);
     SimpleDateFormat sdfLista = new SimpleDateFormat("dd/MM/yyyy");
 %>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h1 class="mb-0">Proyectos de <%= player.getNombrePublico() %></h1>
-    <% if (esMismoJugador) { %>
+    <% if (esPerfil) { %>
         <a href="<%= request.getContextPath() %>/perfil" class="btn btn-outline-secondary">Volver a mi perfil</a>
     <% } else { %>
         <a href="<%= request.getContextPath() %>/players?id=<%= player.getId() %>" class="btn btn-outline-secondary">Volver al jugador</a>
@@ -31,7 +31,7 @@
         <%
             if (proyectos == null || proyectos.isEmpty()) {
         %>
-            <% if (esMismoJugador) { %>
+            <% if (esPerfil) { %>
                 <p class="text-muted mb-0">No tenés proyectos creados.</p>
             <% } else { %>
                 <p class="text-muted mb-0">Este jugador no tiene proyectos creados.</p>
@@ -73,7 +73,7 @@
                                         <td><%= proyectoItem.getDivision() != null ? proyectoItem.getDivision().getContexto() + ", " + proyectoItem.getDivision().getNam() : "-" %></td>
                                         <td class="text-end">
                                             <div class="d-flex flex-wrap gap-1 justify-content-end">
-                                                <a href="<%= request.getContextPath() %>/proyectos?id=<%= proyectoItem.getId() %>"
+                                                <a href="<%= request.getContextPath() %>/proyectos?id=<%= proyectoItem.getId() %><%= esPerfil ? "&volverA=perfil" : "&volverA=proyectos" %>"
                                                    class="btn btn-sm btn-outline-primary">Ver</a>
                                             </div>
                                         </td>

@@ -49,7 +49,7 @@ public class ProyectoServlet extends BaseApiServlet {
                 boolean esLider = proyecto.getLider() != null && proyecto.getLider().getId().equals(playerLogueado.getId());
                 req.setAttribute("esLider", esLider);
                 
-
+                proyectoFormAtrributeCheck(req);
                 req.getRequestDispatcher("/WEB-INF/vistas/proyecto-form.jsp").forward(req, resp);
                 return;
             }

@@ -6,12 +6,14 @@
     ProyectoDetailDTO proyecto = (ProyectoDetailDTO) request.getAttribute("proyecto");
     List<PlayerSummaryDTO> solicitudes = (List<PlayerSummaryDTO>) request.getAttribute("solicitudes");
     request.setAttribute("tituloPagina", "Solicitudes de " + proyecto.getId());
+    Boolean perfilAtributo = (Boolean) request.getAttribute("perfil");
+    boolean esPerfil = Boolean.TRUE.equals(perfilAtributo);
 %>
 <%@ include file="/WEB-INF/vistas/fragmentos/header.jsp" %>
-
+<%@ include file="/WEB-INF/vistas/fragmentos/volver-check.jsp" %>
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h1 class="mb-0">Solicitudes de unión a <%= proyecto.getId() %></h1>
-    <a href="<%= request.getContextPath() %>/proyectos?id=<%= proyecto.getId() %>" class="btn btn-outline-secondary">Volver al proyecto</a>
+    <a href="<%= urlConVolver(request.getContextPath() + "/proyectos?id=" + proyecto.getId(), volverA) %>" class="btn btn-outline-secondary">Volver al proyecto</a>
 </div>
 
 <div class="card">
@@ -45,17 +47,26 @@
                                         <td><%= solicitanteItem.getPaisPrefix() != null ? solicitanteItem.getPaisPrefix().getNombrePublico() : "-" %></td>
                                         <td class="text-end">
                                             <div class="d-flex gap-1 justify-content-end">
+                                                
                                                 <form method="post" action="<%= request.getContextPath() %>/proyectos/solicitudes/aceptar" class="d-inline">
                                                     <input type="hidden" name="proyectoId" value="<%= proyecto.getId() %>"/>
                                                     <input type="hidden" name="playerId" value="<%= solicitanteItem.getId() %>"/>
+                                                    <% if (volverA != null) { %>
+                                                        <input type="hidden" name="volverA" value="<%= volverA %>"/>
+                                                    <% } %>
                                                     <button type="submit" class="btn btn-sm btn-outline-success">Aceptar</button>
                                                 </form>
+                                                
                                                 <form method="post" action="<%= request.getContextPath() %>/proyectos/solicitudes/rechazar" class="d-inline"
-                                                      onsubmit="return confirm('¿Rechazar esta solicitud?');">
+                                                    onsubmit="return confirm('¿Rechazar esta solicitud?');">
                                                     <input type="hidden" name="proyectoId" value="<%= proyecto.getId() %>"/>
                                                     <input type="hidden" name="playerId" value="<%= solicitanteItem.getId() %>"/>
+                                                    <% if (volverA != null) { %>
+                                                        <input type="hidden" name="volverA" value="<%= volverA %>"/>
+                                                    <% } %>
                                                     <button type="submit" class="btn btn-sm btn-outline-danger">Rechazar</button>
                                                 </form>
+                                                
                                             </div>
                                         </td>
                                     </tr>

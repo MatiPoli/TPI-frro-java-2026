@@ -45,7 +45,8 @@ public class ProyectoUnirseServlet extends BaseApiServlet {
                 return;
             }
             client.enviarSolicitud(proyectoId, playerLogueado.getId());
-            resp.sendRedirect(req.getContextPath() + "/proyectos?id=" + proyectoId);
+            String baseUrl = req.getContextPath() + "/proyectos?id=" + proyectoId;
+            resp.sendRedirect(proyectoFormUrlCheck(req, baseUrl));
         } catch (IOException e) {
             manejarErrorApi(req, resp, e);
         }

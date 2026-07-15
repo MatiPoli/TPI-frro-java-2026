@@ -5,6 +5,16 @@
     request.setAttribute("tituloPagina", "Países");
     request.setAttribute("anchoCompleto", true);
 %>
+
+<%!
+    private String mostrarFinal(Object valor, int ultimos) {
+        if (valor == null) return "-";
+        String texto = String.valueOf(valor);
+        if (texto.isBlank()) return "-";
+        if (texto.length() <= ultimos) return texto;
+        return "..." + texto.substring(texto.length() - ultimos);
+    }
+%>
 <%@ include file="/WEB-INF/vistas/fragmentos/header.jsp" %>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -50,13 +60,27 @@
                                     <td><%= pais.getId() %></td>
                                     <td><%= pais.getNombre() %></td>
                                     <td><%= pais.getNombrePublico() %></td>
-                                    <td><%= pais.getDsIdGuild() %></td>
-                                    <td><%= pais.getDsIdGlobalChat() %></td>
-                                    <td><%= pais.getDsIdCountryChat() %></td>
-                                    <td><%= pais.getDsIdLog() %></td>
-                                    <td><%= pais.getDsIdRequest() %></td>
-                                    <td><%= pais.getWebId() %></td>
-                                    <td><%= pais.getWebToken() %></td>
+                                    <td class="small text-muted font-monospace" title="<%= pais.getDsIdGuild() %>">
+                                        <%= mostrarFinal(pais.getDsIdGuild(), 10) %>
+                                    </td>
+                                    <td class="small text-muted font-monospace" title="<%= pais.getDsIdGlobalChat() %>">
+                                        <%= mostrarFinal(pais.getDsIdGlobalChat(), 10) %>
+                                    </td>
+                                    <td class="small text-muted font-monospace" title="<%= pais.getDsIdCountryChat() %>">
+                                        <%= mostrarFinal(pais.getDsIdCountryChat(), 10) %>
+                                    </td>
+                                    <td class="small text-muted font-monospace" title="<%= pais.getDsIdLog() %>">
+                                        <%= mostrarFinal(pais.getDsIdLog(), 10) %>
+                                    </td>
+                                    <td class="small text-muted font-monospace" title="<%= pais.getDsIdRequest() %>">
+                                        <%= mostrarFinal(pais.getDsIdRequest(), 10) %>
+                                    </td>
+                                    <td class="text-truncate small text-muted font-monospace" style="max-width: 120px;" title="<%= pais.getWebId() %>">
+                                        <%= pais.getWebId() %>
+                                    </td>
+                                    <td class="text-truncate small text-muted font-monospace" style="max-width: 120px;" title="<%= pais.getWebToken() %>">
+                                        <%= pais.getWebToken() %>
+                                    </td>
                                     <td class="text-end">
                                         <a href="<%= request.getContextPath() %>/paises/regiones?paisId=<%= pais.getId() %>" class="btn btn-sm btn-outline-primary">Regiones</a>
                                         <a href="<%= request.getContextPath() %>/paises/divisiones?paisId=<%= pais.getId() %>" class="btn btn-sm btn-outline-primary">Divisiones</a>

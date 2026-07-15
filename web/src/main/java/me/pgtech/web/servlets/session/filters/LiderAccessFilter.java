@@ -37,7 +37,10 @@ public class LiderAccessFilter implements Filter {
         PlayerDetailDTO player = (PlayerDetailDTO) session.getAttribute("player");
         String proyectoId = req.getParameter("proyectoId");
         if (proyectoId == null) {
-            throw new IllegalArgumentException("Falta el parámetro: proyectoId");
+            proyectoId = req.getParameter("id");
+            if (proyectoId == null) {
+                throw new IllegalArgumentException("Falta el parámetro: proyectoId");
+            }
         }
         ProyectoDetailDTO proyecto = client.obtener(proyectoId);
         if (!player.getId().equals(proyecto.getLider().getId())) {

@@ -20,7 +20,9 @@ public class ProyectoFinalizarServlet extends BaseApiServlet {
         try {
             String proyectoId = req.getParameter("proyectoId");
             client.finalizarProyecto(proyectoId);
-            resp.sendRedirect(req.getContextPath() + "/proyectos?id=" + proyectoId);
+
+            String baseUrl = req.getContextPath() + "/proyectos?id=" + proyectoId;
+            resp.sendRedirect(proyectoFormUrlCheck(req, baseUrl));
         } catch (IOException e) {
             manejarErrorApi(req, resp, e);
         }

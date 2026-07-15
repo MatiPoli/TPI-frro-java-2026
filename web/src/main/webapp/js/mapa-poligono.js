@@ -14,11 +14,15 @@ function initMapaPoligono(config) {
         attribution: '&copy; OpenStreetMap'
     }).addTo(map);
 
-    // Capas de contexto: regiones ya existentes del mismo país/división, solo lectura
     if (capasContexto.length > 0) {
         capasContexto.forEach(geo => {
             L.geoJSON(geo, {
-                style: { color: '#9aa4b2', weight: 1, dashArray: '4', fillOpacity: 0.05 },
+                style: { 
+                    color: '#7ec8f5',
+                    weight: 2,
+                    dashArray: '5, 5',
+                    fillOpacity: 0.15
+                },
                 interactive: false
             }).addTo(map);
         });
