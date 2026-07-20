@@ -2,7 +2,6 @@ package me.pgtech.web.servlets.proyecto;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

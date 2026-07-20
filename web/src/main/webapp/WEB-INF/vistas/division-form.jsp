@@ -85,7 +85,7 @@
 
                 <div class="d-flex gap-2">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <a href="<%= request.getContextPath() %>/divisiones" class="btn btn-outline-secondary">Cancelar</a>
+                    <a href="<%= request.getContextPath() %>/paises/divisiones?paisId=<%= paisIdSeleccionado %>" class="btn btn-outline-secondary">Cancelar</a>
                 </div>
             </form>
         </div>

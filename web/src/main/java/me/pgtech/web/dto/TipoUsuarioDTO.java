@@ -1,7 +1,5 @@
 package me.pgtech.web.dto;
 
-import java.util.Objects;
-
 public class TipoUsuarioDTO {
 
     private Long id;

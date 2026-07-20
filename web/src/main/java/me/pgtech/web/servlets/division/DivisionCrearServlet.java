@@ -32,8 +32,7 @@ public class DivisionCrearServlet extends BaseApiServlet {
             pais.setId(Long.parseLong(req.getParameter("paisId")));
             dto.setPais(pais);
             client.crear(dto);
-            //TODO: Redirigir mejor
-            resp.sendRedirect(req.getContextPath() + "/divisiones");
+            resp.sendRedirect(req.getContextPath() + "/paises/divisiones?paisId=" + pais.getId());
         } catch (NumberFormatException e) {
             manejarError(req, resp, e, "País inválido");
         } catch (IOException e) {

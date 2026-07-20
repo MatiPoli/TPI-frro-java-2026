@@ -13,7 +13,7 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h1 class="mb-0">Regiones de <%= division.getNombre() %></h1>
     <div class="d-flex gap-2">
-        <a href="<%= request.getContextPath() %>/divisiones" class="btn btn-outline-secondary">Volver</a>
+        <a href="<%= request.getContextPath() %>/paises/divisiones?paisId=<%= division.getPais().getId() %>" class="btn btn-outline-secondary">Volver</a>
         <a href="<%= request.getContextPath() %>/divisiones/regiones/nuevo?divisionId=<%= division.getId() %>" class="btn btn-primary">+ Nueva</a>
     </div>
 </div>

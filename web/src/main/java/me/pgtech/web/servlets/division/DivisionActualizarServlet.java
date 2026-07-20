@@ -35,7 +35,7 @@ public class DivisionActualizarServlet extends BaseApiServlet {
             dto.setPais(pais);
 
             client.actualizar(id, dto);
-            resp.sendRedirect(req.getContextPath() + "/divisiones");
+            resp.sendRedirect(req.getContextPath() + "/paises/divisiones?paisId=" + pais.getId());
         } catch (IllegalArgumentException e) {
             manejarError(req, resp, e, "Datos inválidos: " + e.getMessage());
         } catch (IOException e) {

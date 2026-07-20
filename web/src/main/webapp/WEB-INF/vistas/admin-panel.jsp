@@ -21,7 +21,7 @@
         <div class="card h-100">
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">Rangos</h5>
-                <p class="card-text text-muted">Roles de staff: Usuario, Reviewer, Moderador, Admin.</p>
+                <p class="card-text text-muted">Roles de staff: Usuario, Moderador, Admin.</p>
                 <a href="<%= request.getContextPath() %>/rangos-usuario" class="btn btn-outline-primary btn-sm mt-auto align-self-start">Gestionar</a>
             </div>
         </div>
@@ -43,16 +43,6 @@
                 <h5 class="card-title">Países</h5>
                 <p class="card-text text-muted">Argentina, Chile, Perú, Bolivia, Paraguay, Uruguay y sus regiones.</p>
                 <a href="<%= request.getContextPath() %>/paises" class="btn btn-outline-primary btn-sm mt-auto align-self-start">Gestionar</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-6 col-lg-4">
-        <div class="card h-100">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Divisiones</h5>
-                <p class="card-text text-muted">Provincias, comunas, barrios. Dependientes de cada país.</p>
-                <a href="<%= request.getContextPath() %>/divisiones" class="btn btn-outline-primary btn-sm mt-auto align-self-start">Gestionar</a>
             </div>
         </div>
     </div>
