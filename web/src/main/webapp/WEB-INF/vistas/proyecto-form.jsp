@@ -9,6 +9,10 @@
     Boolean yaSolicitoUnion = (Boolean) request.getAttribute("yaSolicitoUnion");
     Boolean esMiembro = (Boolean) request.getAttribute("esMiembro");
     Boolean esLider = (Boolean) request.getAttribute("esLider");
+    Boolean tieneEspacio = (Boolean) request.getAttribute("tieneEspacio");
+    Integer cantMaxProyectosTipo = (Integer) request.getAttribute("cantMaxProyectosTipo");
+    Boolean proyectoLleno = (Boolean) request.getAttribute("proyectoLleno");
+    Long cantProyectos = (Long) request.getAttribute("cantProyectos");
     request.setAttribute("tituloPagina", "Proyecto: " + proyecto.getId());
 
     SimpleDateFormat sdfForm = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -103,11 +107,17 @@
                     <a href="<%= urlConVolver(request.getContextPath() + "/proyectos/solicitudes?proyectoId=" + proyecto.getId(), volverA) %>"
                     class="btn btn-outline-primary">Ver solicitudes</a>
                 <% } %>
-
-                <% if (Boolean.TRUE.equals(yaSolicitoUnion)) { %>
-                    <button class="btn btn-outline-secondary" disabled>Ya solicitaste unirte</button>
-                <% } else  if (Boolean.TRUE.equals(esLider) || Boolean.TRUE.equals(esMiembro)) { %>
+                
+                <% if (Boolean.TRUE.equals(esLider) || Boolean.TRUE.equals(esMiembro)) { %>
                     <button class="btn btn-outline-secondary" disabled>Ya eres miembro</button>
+                <% } else if (Boolean.TRUE.equals(!sinFinalizacion)) { %>
+                    <button class="btn btn-outline-secondary" disabled>Proyecto no Activo</button>
+                <% } else if (Boolean.TRUE.equals(proyectoLleno)) { %>
+                    <button class="btn btn-outline-secondary" disabled>Proyecto lleno (Máx <%= proyecto.getTipoProyecto().getMaxMiembros() %> miembros)</button>
+                <% } else if (Boolean.TRUE.equals(!tieneEspacio)) { %>
+                    <button class="btn btn-outline-secondary" disabled>No tienes espacio (<%= cantProyectos %> de <%= cantMaxProyectosTipo %>)</button>
+                <% } else if (Boolean.TRUE.equals(yaSolicitoUnion)) { %>
+                    <button class="btn btn-outline-secondary" disabled>Ya solicitaste unirte</button>
                 <% } else { %>
                     <form method="post" action="<%= request.getContextPath() %>/proyectos/unirse" class="d-inline">
                         <input type="hidden" name="proyectoId" value="<%= proyecto.getId() %>"/>

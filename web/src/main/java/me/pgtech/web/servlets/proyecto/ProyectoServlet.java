@@ -9,8 +9,10 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+import me.pgtech.web.client.PlayerApiClient;
 import me.pgtech.web.client.ProyectoApiClient;
 import me.pgtech.web.client.TipoProyectoApiClient;
+import me.pgtech.web.dto.Estado;
 import me.pgtech.web.dto.PaginaDTO;
 import me.pgtech.web.dto.PlayerDetailDTO;
 import me.pgtech.web.dto.PlayerSummaryDTO;
@@ -25,6 +27,7 @@ public class ProyectoServlet extends BaseApiServlet {
 
     private final ProyectoApiClient client = new ProyectoApiClient();
     private final TipoProyectoApiClient tipoClient = new TipoProyectoApiClient();
+    private final PlayerApiClient playerClient = new PlayerApiClient();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,7 +39,8 @@ public class ProyectoServlet extends BaseApiServlet {
                 req.setAttribute("tipos", tipoClient.listar());
 
                 HttpSession session = req.getSession(false);
-                PlayerDetailDTO playerLogueado = (PlayerDetailDTO) session.getAttribute("player");
+                PlayerDetailDTO player = (PlayerDetailDTO) session.getAttribute("player");
+                PlayerDetailDTO playerLogueado = playerClient.obtener(player.getId());
 
                 List<PlayerSummaryDTO> solicitudes = client.obtenerSolicitudes(idParam);
                 boolean yaSolicito = solicitudes.stream().anyMatch(p -> p.getId().equals(playerLogueado.getId()));
@@ -48,7 +52,19 @@ public class ProyectoServlet extends BaseApiServlet {
 
                 boolean esLider = proyecto.getLider() != null && proyecto.getLider().getId().equals(playerLogueado.getId());
                 req.setAttribute("esLider", esLider);
-                
+
+                List<ProyectoSummaryDTO> proyectosDelJugador = playerClient.listarProyectos(playerLogueado.getId());
+                int cantMaxProyectosTipo = playerLogueado.getTipoUsuario().getCantProyecSim();
+                long cantProyectos = proyectosDelJugador.stream().filter(p -> p.getEstado() == Estado.ACTIVO || p.getEstado() == Estado.EDITANDO).count();
+                boolean tieneEspacio = cantProyectos < cantMaxProyectosTipo;
+                req.setAttribute("tieneEspacio", tieneEspacio);
+                req.setAttribute("cantMaxProyectosTipo", cantMaxProyectosTipo);
+                req.setAttribute("cantProyectos", cantProyectos);
+
+                long cantMaxMiembros = proyecto.getTipoProyecto().getMaxMiembros();
+                boolean proyectoLleno = miembros.size() >= cantMaxMiembros;
+                req.setAttribute("proyectoLleno", proyectoLleno);
+
                 proyectoFormAtrributeCheck(req);
                 req.getRequestDispatcher("/WEB-INF/vistas/proyecto-form.jsp").forward(req, resp);
                 return;
