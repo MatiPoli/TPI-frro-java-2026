@@ -1,0 +1,14 @@
+# Usa una imagen oficial de Tomcat (puedes cambiar jdk17 por jdk11 o jdk8 según la versión de Java que usaste)
+FROM tomcat:9.0-jdk17
+
+# Elimina las aplicaciones de ejemplo que trae Tomcat por defecto
+RUN rm -rf /usr/local/tomcat/webapps/ROOT
+
+# Copia tu archivo .war al servidor y lo renombra a ROOT.war para que sea la página principal (sin tener que poner /nombre-app en la URL)
+COPY web/war/bteconosur-web.war /usr/local/tomcat/webapps/ROOT.war
+
+# Expone el puerto que usa Tomcat
+EXPOSE 8080
+
+# Inicia el servidor
+CMD ["catalina.sh", "run"]
