@@ -14,7 +14,7 @@ import me.pgtech.web.dto.PaginaDTO;
 
 public class PaisApiClient {
 
-    private static final String BASE_URL = "http://localhost:7070/api/pais";
+    private static final String BASE_URL = "http://209.192.185.15:25643/api/pais";
 
     private final ApiHttpClient http = new ApiHttpClient();
     private final Gson gson = new Gson();

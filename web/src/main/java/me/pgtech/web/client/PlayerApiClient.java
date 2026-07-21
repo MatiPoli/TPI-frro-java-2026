@@ -16,7 +16,7 @@ import me.pgtech.web.dto.ProyectoSummaryDTO;
 
 public class PlayerApiClient {
 
-    private static final String BASE_URL = "http://localhost:7070/api/player";
+    private static final String BASE_URL = "http://209.192.185.15:25643/api/player";
 
     private final ApiHttpClient http = new ApiHttpClient();
     private final Gson gson = new Gson();

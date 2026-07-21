@@ -10,7 +10,7 @@ import me.pgtech.web.dto.TipoUsuarioDTO;
 
 public class TipoUsuarioApiClient {
 
-    private static final String BASE_URL = "http://localhost:7070/api/tipo-usuario";
+    private static final String BASE_URL = "http://209.192.185.15:25643/api/tipo-usuario";
     private final ApiHttpClient http = new ApiHttpClient();
     private final Gson gson = new Gson();
 

@@ -10,7 +10,7 @@ import me.pgtech.web.dto.RangoUsuarioDTO;
 
 public class RangoUsuarioApiClient {
 
-    private static final String BASE_URL = "http://localhost:7070/api/rango-usuario";
+    private static final String BASE_URL = "http://209.192.185.15:25643/api/rango-usuario";
     private final ApiHttpClient http = new ApiHttpClient();
     private final Gson gson = new Gson();
 
